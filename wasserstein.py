@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-Class that computes the Wasserstein distance in tensorflow.
+Class that computes the Wasserstein DISTANCE in tensorflow.
 
    The implementation follows Algorithm 2 in [Genevay Aude, Marco Cuturi,
    Gabriel Peyre, Francis Bach, "Stochastic Optimization for Large-scale
