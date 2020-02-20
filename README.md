@@ -1,8 +1,3 @@
 # Resource
 
-NEW
-rua
-呐呐呐呐呐
-algbraic
-yyyyyyyy
-yymmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+20th, Feb, 2020
