@@ -19,7 +19,6 @@ Class that computes the Wasserstein distance in tensorflow.
    Optimal Transport", NIPS 2016], which compares a distribution to a
    fixed set of samples. Internally, base distances are recomputed a lot.
    To just compute the Wasserstein distance between to sets of points,
-   don't use this code, just do a bipartitle matching.
 
 '''
 
