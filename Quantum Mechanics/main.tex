@@ -1,0 +1,221 @@
+\documentclass[a4paper,11pt]{article}
+\pdfoutput=1 % if your are submitting a pdflatex (i.e. if you have
+             % images in pdf, png or jpg format)
+
+\usepackage{jheppub} % for details on the use of the package, please
+                     % see the JHEP-author-manual
+
+\usepackage[T1]{fontenc} % if needed
+\usepackage{mathtools}
+\usepackage{amsthm}
+
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+  \hbox{}\nobreak\hfil(#1)%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+
+\newsavebox\mybox
+\newenvironment{aquote}[1]
+  {\savebox\mybox{#1}\begin{quote}}
+  {\signed{\usebox\mybox}\end{quote}}
+
+\def \diff{\mathrm{d}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+
+\title{\boldmath Quantum Mechanics}
+
+
+%% %simple case: 2 authors, same institution
+%% \author{A. Uthor}
+%% \author{and A. Nother Author}
+%% \affiliation{Institution,\\Address, Country}
+
+% more complex case: 4 authors, 3 institutions, 2 footnotes
+\author[]{Mingde Ren}
+
+% The "\note" macro will give a warning: "Ignoring empty anchor..."
+% you can safely ignore it.
+
+\affiliation[]{South University of Science and Technology of China, Shenzhen, China}
+
+% e-mail addresses: one for each author, in the same order as the authors
+\emailAdd{11710919@mail.sustech.edu.cn}
+
+
+
+
+\abstract{This is the note for a seminar on Quantum Mechanics in the spring semester, 2020. The seminar is mainly aimed for people interested in quantum mechanics with mathematical background. The lectures will focus on the algebraic structures in quantum mechanics, rather than talking about the PDEs or using methods in functional analysis, for there have already been lots of books in such topics.}
+
+
+
+\begin{document} 
+\maketitle
+%\flushbottom
+
+\input{Chapter1.tex}
+
+\input{Chapter2.tex}
+
+\section{Introduction to quantum mechanics}
+\subsection{Axioms}
+
+\subsection{Simple examples}
+
+\section{Quantization: Where do quantum systems come from?}
+\subsection{Canonical quantization}
+\subsubsection{What is a quantum system?}
+\subsubsection{The two Lie algebras}
+\subsubsection{Why is canonical quantization "wrong"?}
+\subsubsection{Examples}
+\subsubsection{Bipartite systems and tensor product}
+\subsubsection{How to quantize a classical field?}
+
+\subsection{Path integral quantization}
+\subsubsection{Physical Picture}
+\subsubsection{From canonical quantization to path integral}
+\subsubsection{Quantum theory made topological: Why TQFT?}
+\subsubsection{Limitations and future outlook}
+
+\section{Solving quantum systems}
+\subsection{The Schrodinger equation}
+
+\subsection{The history of the decline and fall of the perturbation theory}
+\subsubsection{Why do we need perturbation?}
+\subsubsection{When it fails}
+\subsubsection{Divergent series in physics: the crazy physicists}
+
+\subsection{Group representation theory and symmetry}
+
+
+\iffalse
+
+\section{LATEX Some examples and best-practices}
+\label{sec:intro}
+
+%%%
+For internal references use label-refs: see section~\ref{sec:intro}.
+Bibliographic citations can be done with cite: refs.~\cite{a,b,c}.
+When possible, align equations on the equal sign. The package
+\texttt{amsmath} is already loaded. See \eqref{eq:x}.
+\begin{equation}
+\label{eq:x}
+\begin{split}
+x &= 1 \,,
+\qquad
+y = 2 \,,
+\\
+z &= 3 \,.
+\end{split}
+\end{equation}
+Also, watch out for the punctuation at the end of the equations.
+
+
+If you want some equations without the tag (number), please use the available
+starred-environments. For example:
+\begin{equation*}
+x = 1
+\end{equation*}
+
+The amsmath package has many features. For example, you can use use
+\texttt{subequations} environment:
+\begin{subequations}\label{eq:y}
+\begin{align}
+\label{eq:y:1}
+a & = 1
+\\
+\label{eq:y:2}
+b & = 2
+\end{align}
+and it will continue to operate across the text also.
+\begin{equation}
+\label{eq:y:3}
+c = 3
+\end{equation}
+\end{subequations}
+The references will work as you'd expect: \eqref{eq:y:1},
+\eqref{eq:y:2} and \eqref{eq:y:3} are all part of \eqref{eq:y}.
+
+A similar solution is available for figures via the \texttt{subfigure}
+package (not loaded by default and not shown here). 
+All figures and tables should be referenced in the text and should be
+placed at the top of the page where they are first cited or in
+subsequent pages. Positioning them in the source file
+after the paragraph where you first reference them usually yield good
+results. See figure~\ref{fig:i} and table~\ref{tab:i}.
+
+\begin{figure}[tbp]
+\centering % \begin{center}/\end{center} takes some additional vertical space
+\includegraphics[width=.45\textwidth,trim=0 380 0 200,clip]{img1.pdf}
+\hfill
+\includegraphics[width=.45\textwidth,origin=c,angle=180]{img2.pdf}
+% "\includegraphics" is very powerful; the graphicx package is already loaded
+\caption{\label{fig:i} Always give a caption.}
+\end{figure}
+
+\begin{table}[tbp]
+\centering
+\begin{tabular}{|lr|c|}
+\hline
+x&y&x and y\\
+\hline 
+a & b & a and b\\
+1 & 2 & 1 and 2\\
+$\alpha$ & $\beta$ & $\alpha$ and $\beta$\\
+\hline
+\end{tabular}
+\caption{\label{tab:i} We prefer to have borders around the tables.}
+\end{table}
+
+We discourage the use of inline figures (wrapfigure), as they may be
+difficult to position if the page layout changes.
+
+We suggest not to abbreviate: ``section'', ``appendix'', ``figure''
+and ``table'', but ``eq.'' and ``ref.'' are welcome. Also, please do
+not use \texttt{\textbackslash emph} or \texttt{\textbackslash it} for
+latin abbreviaitons: i.e., et al., e.g., vs., etc.
+
+\appendix
+\section{Appendix I}
+Please always give a title also for appendices.
+
+
+
+\acknowledgments
+
+This is the most common positions for acknowledgments. A macro is
+available to maintain the same layout and spelling of the heading.
+
+\paragraph{Note added.} This is also a good position for notes added
+after the paper has been written.
+
+
+
+
+
+% The bibliography will probably be heavily edited during typesetting.
+% We'll parse it and, using the arxiv number or the journal data, will
+% query inspire, trying to verify the data (this will probalby spot
+% eventual typos) and retrive the document DOI and eventual errata.
+% We however suggest to always provide author, title and journal data:
+% in short all the informations that clearly identify a document.
+
+% Please avoid comments such as "For a review'', "For some examples",
+% "and references therein" or move them in the text. In general,
+% please leave only references in the bibliography and move all
+% accessory text in footnotes.
+
+% Also, please have only one work for each \bibitem.
+\fi
+
+\begin{thebibliography}{99}
+
+\bibitem{Discourse on Method}
+Rene Descartes, \emph{Discourse on Method}.
+
+\end{thebibliography}
+
+\end{document}

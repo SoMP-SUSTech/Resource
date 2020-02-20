@@ -1,0 +1,111 @@
+\section{A brief story of classical mechanics}
+\subsection{Historical line}
+It occurs very often that the logical line reverses the historical line. The following is such a case. Writing with respect to the logical line is better for the coherence of the story while it is harder to understand. So I shall first talk a little bit about the history before getting into the topic, which is better for the understanding of the motivation for proposing those theories.
+
+The very first person to be mentioned is definitely Newton, who published \textit{mathematical principles of natural philosophy} in 1686, which can be regarded as the establishment of Newtonian mechanics.
+
+The second person was another natural philosopher, Euler. He elaborated the subject \textit{calculus of variations} in 1733. The first problem raised in the history of calculus of variation is \textit{brachistochrone curve}, the curve of fastest descent, proposed by Johann Bernoulli in 1696. Using the language of calculus of variation, the problem is reformulated as
+
+\begin{center}
+    Find a function $y$ that minimize the following functional:
+    \begin{equation}
+        T[y] = \int_{x_1}^{x_2} \sqrt{1+y'^2} \diff x.
+    \end{equation}
+\end{center}
+
+The problem can be generalised to functionals of such kind: $T[y]=\int_{x_1}^{x_2}F(y,\dot{y},x)\diff x$ for some function $F$. And using calculus of variation, the problem is reverted to a differential equation called Euler-Lagrange equation
+
+\begin{equation}
+    \label{eq2.2}
+    \frac{\partial F}{\partial y} - \frac{\diff}{\diff x}\frac{\partial F}{\partial \dot{y}} = 0.
+\end{equation}
+
+\textbf{REMARK}:
+\begin{itemize}
+    \item The notation $\frac{\partial F}{\partial \dot{y}}$ is a little bit confusing. For the function $F(a, b, c)$, it means $\frac{\partial F}{\partial b}\big \vert_{b=\dot{y}}$, since $\dot{x}$ is not really an argument of $F$.
+    \item Lagrange also contributed a lot to this subject. He was working with Euler.
+\end{itemize}
+
+The third person was Lagrange. Newtonian mechanics uses force to deal with problems. However, when we need to solve systems with constraints, force might be not convenient. So people were looking for substitutes. The D'Alembert's principle is a good method to deal with constraints with forces. And Lagrange found that forces can be avoided and reformulated classical mechanics in his \textit{Mécanique analytique}, 1788, in which he used the concept of \textit{generalized coordinate} and using D'Alembert's principle he obtained the equation of motion as:
+
+\begin{equation}
+    \label{eq2.3}
+    \frac{\diff}{\diff t}\frac{\partial T}{\partial \dot{x}} - \frac{\partial T}{\partial x} + \frac{\partial V}{\partial x} = 0,
+\end{equation}
+where $T$ represents kinetic energy and $V$ for potential energy.
+
+Both Euler and he realised some idea of the principle of least action, but not in the modern form. This is formulated by the fourth person, Hamilton:
+
+If you define a function called \textit{Lagrangian} as $L(x, \dot{x}, t) = T - V$, then since $\partial V/\partial \dot{x} = 0$, \eqref{eq2.3} becomes
+
+\begin{equation}
+    \label{eq2.4}
+    \frac{\partial L}{\partial x} - \frac{\diff}{\diff t}\frac{\partial L}{\partial \dot{x}} = 0.
+\end{equation}
+
+You see that \eqref{eq2.4} is of the same form as \eqref{eq2.2}! Thus Hamilton proposed that the equation of motion is a condition for the minimization of some functional. The functional is now known as the \textit{action}:
+
+\begin{equation}
+    S[x]\coloneqq\int_{t_1}^{t_2}L(x, \dot{x}, t)\diff t.
+\end{equation}
+
+This is known as Hamilton principle.
+
+In addition, Hamilton proposed another reformulation of classical mechanics, which uses the concept of both \textit{generalized coordinate} and \textit{generalized momentum}.
+
+Mathematically, the Lagrangian mechanics is formulated with the tangent bundle of configuration manifold while the Hamiltonian one is with the cotangent bundle, which differs from the former by a Legendre transformation.
+
+\subsection{Lagrange formulism}
+With constraints, the configuration space of a classical system will be a submanifold of the  Euclidean space. In this case, it might be redundant to still use Cartesian coordinates since they are not independent when constrained to the manifold. That leads to our first definition:
+
+\begin{definition}
+    Given a classical system, if a set of independent variables can totally determine the configuration of the system, then they are called general coordinates of the system.
+\end{definition}
+
+\textbf{REMARK}:
+\begin{itemize}
+    \item Remark for the remarks. Things in the REMARK part are not necessarily related to the main context. It can be aimed for anyone. It is just something I want to note for the current topic. Do not get bothered if you came into some word you do not understand. But finishing reading those words is appreciated.
+    \item I won't give \textit{classical system} a definition since there is nothing special to note here. However, I will use this concept to define a quantum system.
+    \item That is to say, a choice of general coordinates is a choice of parameterization of the configuration manifold. The number of general coordinates is equal to the number of dimension of this manifold, which is clearly invariant under changes of variables.
+    \item The configuration manifold is always an embedded manifold into an higher dimensional Euclidean space. So sometimes we still use the redundant Euclidean coordinates since it is endowed with a linear structure and a natural metric structure.
+\end{itemize}
+
+\textbf{Examples}:
+\begin{itemize}
+    \item Free particles in three dimensions
+    
+    In classical physics, particles are regarded as point particles. So the configuration space is just $\mathbb{R}^3 \times \cdots \times \mathbb{R}^3 \cong \mathbb{R}^{3n}$. A choice of general coordinates is just the Euclidean coordinates of each particle.
+    
+    (In fact there is no natural choice for the background coordinates of the Euclidean space due to Galileo's principle of relativity. But I won't discuss it here.)
+    
+    \item A stick in two dimensions
+    
+    The configuration of the stick can be determined by its two end points(or actually any two points on it). However, there is a constraint for the two point: a constant separation. Thus the configuration space is $2+2-1=3$ dimensional and it is diffeomorphic to $\mathbb{R}^2\times S^1$.
+    
+    \item An infinitely thin stick in three dimensions
+    
+    This is nearly the same as the above one. Note that infinitely thin means there is no rotational degree of freedom along the axis, which ensures that the configuration can be determined by its end points. The configuration space is of $3+3-1=5$ dimensions and diffeomorphic to $\mathbb{R}^3\times S^2$.
+    
+    \item A stick of finite thickness in three dimensions
+    
+    In this case, only the positions of two end points can no longer determine the configuration of the stick. We need to consider the rotation around the axis, which is a degree of freedom of dimension one. Thus the space is diffeomorphic to $\mathbb{R}^3\times S^2\times S^1$.
+    
+    Note that this is exactly the same for any rigid body in three dimensions since a configuration of a rigid body can be determined by any three points on it. There is another way to count the degrees of freedom: there are three constraints between each pair of the three points. Thus the dimension is of $3+3+3-3=6=3+2+1$.
+    
+    \item Simple pendulum in two dimensions
+    
+    This is a historic model. The configuration space of it is just $S^1$. The equation of motion for it is nonlinear. But if the angle is small enough, since $S^1$ is locally diffeomorphic to $\mathbb{R}$, the equation of motion can be approximated as that of a harmonic oscillator.
+    
+    \item Double pendulum in two dimensions
+    
+    A double pendulum is a single pendulum connected to another. Thus the configuration space is diffeomorphic to $S^1\times S^1\cong T^2$.
+    
+\end{itemize}
+
+\subsection{Hamilton formulism}
+
+\subsection{Concrete examples}
+\subsubsection{Trivial examples}
+\subsubsection{Normal modes and dispersion relation}
+\subsubsection{Classical field theory}
+\subsubsection{Maxwell's theory and winding number}
