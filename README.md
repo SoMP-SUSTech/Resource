@@ -1,3 +1,5 @@
-# Resource
+# Society of Mathematics and Physics of SUSTech
 
-20th, Feb, 2020
+This repository is for managing notes written by fellows of **Society of Mathematics and Physics of SUSTech**.
+
+Please contact ```somp-sustech@outlook.com``` if you have any question.
