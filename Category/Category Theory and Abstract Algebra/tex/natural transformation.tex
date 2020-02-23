@@ -1,0 +1,353 @@
+\section{Natural Transformation}
+Natural transformations characterize the notion of naturality. After natural transformation is introduced, we will see an interesting example of category, the functor category. After that, we shall introduce the notion of representable functors, the character of which really shines and will lead us deeper into the category theory.
+	\begin{definition}[Natural Transformation]
+	Given two parallel functors $F,G:\mathcal{C}\rightrightarrows \mathcal{D}$, a \textbf{natural transformation} $\alpha$ from $F$ to $G$, denoted by $\alpha:F\Rightarrow G$, consists of:
+		\begin{itemize}
+			\item for each object $c\in\Obj(\mathcal{C})$, a morphism $\alpha_c\in\Hom_\mathcal{D}(Fc,Gc)$, called the \textbf{component} of $\alpha$ at $c$,
+		\end{itemize}
+		s.t. the following diagram
+		\begin{center}
+			\begin{tikzcd}
+	  			F\dom f\arrow[d,swap,"Ff"] \arrow[r,"\alpha_{\dom f}"] 
+	 			&G\dom f \arrow[d,"Gf"]\\
+				F\cod f\arrow[r,swap,"\alpha_{\cod f}"] 
+				&G\cod f
+		\end{tikzcd}
+		\end{center}
+		\textbf{commutes}, i.e., $(Gf)(\alpha_{\dom f})=(\alpha_{\cod f})(Ff)$, for all $f\in\Mor(\mathcal{C})$.\par
+		A \textbf{natural isomorphism} is a natural transformation whose every component is an isomorphism. A natural isomorphism $\alpha:F\Rightarrow G$ may be denoted as $\alpha:F\cong G$. If there is a natural isomorphism between two functors, then they are called to be \textbf{naturally isomorphic}. We will see soon that naturally isomorphic is an equivalence relation.
+	\end{definition}
+	\begin{example}
+	Here comes some examples of natural transformations:
+	\begin{enumerate}[label=(\roman*)]
+		\item For any finite-dimensional vector space $V$, the evaluation map $\mathrm{ev}:V\to V^{**}$ that sends $v\in V$ to the linear function $\mathrm{ev}(v):V^*\to \mathbb{F}:\varphi\mapsto \varphi(v)$ forms a natural transformation from the idenity functor $1_{\mathrm{Vect}_\mathbb{F}}$ to the double dual functor (the composition of the dual functor $(-)^*$ with the opposite functor of itself). The reader can check this directly by checking the definition of natural transformation. In fact, it is a natural isomorphism, for $\mathrm{ev}:V\to V^{**}$ is an injective linear map and $\dim V=\dim V^{**}$. Therefore, the evaluation map tells us that $V$ and $V^{**}$ are ``naturally isomorphic'', which tends to be an equivalence relation further stronger than isomorphic.
+		\item The opposite group defines a functor $(-)^{op}:\mathrm{Group}\to\mathrm{Group}$ that brings a group to its opposite group and a group homomorphism $\phi:G\to H$ to $\phi^{op}:G^{op}\to H^{op}:g\mapsto \phi(g)$; the fact that $\phi^{op}$ is a group homomorphism can be verified easily. Now that the homomorphisms $\eta_G:G\to G^{op}:g\mapsto g^{-1}$ forms a natural isomorphism from the identity functor $1_{\mathrm{Grp}}$ to $(-)^{op}$, i.e., the following diagram
+		\begin{center}
+			\begin{tikzcd}
+	  			G\arrow[d,swap,"\phi"] \arrow[r,"\eta_G"] 
+	 			&G^{op} \arrow[d,"\phi^{op}"]\\
+				H\arrow[r,swap, "\eta_H"] 
+				&H^{op}
+		\end{tikzcd}
+		\end{center}
+		commutes, as one can verify.
+		\item Given two parallel functors $X,Y:\mathrm{B}G\to \mathcal{C}$, each defines an action of group $G$ on $X,Y\in\Obj(\mathcal{C})$ respectively, then a natural transformation $\alpha:X\Rightarrow Y$ consists of only one morphism $\alpha:X\to Y$ of $\mathcal{C}$. This single morphism (or equivalently, the natural transformation this morphism consists) is called $G$\textbf{-equivariant}, meaning that for each $g\in G$, the diagram
+		\begin{center}
+			\begin{tikzcd}
+	  			X\arrow[d,swap,"Xg"] \arrow[r,"\alpha"] 
+	 			&Y \arrow[d,"Yg"]\\
+				X\arrow[r,swap,"\alpha"] 
+				&Y
+		\end{tikzcd}
+		\end{center}
+		commutes.
+	\end{enumerate}
+	\end{example}
+	Recall the ordinal category in Example 1.1.(ix). Consider the ordinal categories $\mathrm{1}$ and $\mathrm{2}$, there is $\Obj(\mathrm{1})=\{0\}$ and $\Obj(\mathrm{2})=\{0,1\}$, and there are two evident functors $i_0,i_1:\mathrm{1}\to\mathrm{2}$ defined by $i_0:0\mapsto 0$ and $i_1:0\mapsto 1$. We keep these notations, and here comes a characterizing of natural transformations between two functors:\footnote{It's rather weak, though.}
+	\begin{lemma}
+	Given two parallel functors $F,G:\mathcal{C}\rightrightarrows \mathcal{D}$. Natural transformations from $F$ to $G$ correspond bijectively to functors $H:\mathcal{C}\times \mathrm{2}\to D$ s.t. the following diagram
+	\begin{center}
+			\begin{tikzcd}
+	  			\mathcal{C}\arrow[r,"1_\mathcal{C}\times i_0"]\arrow[rd,swap,"F"]
+	  			&\mathcal{C}\times \mathrm{2}\arrow[d,"H"]
+	  			&\mathcal{C}\arrow[l,swap,"1_\mathcal{C}\times i_1"]\arrow[ld,"G"]\\
+	  			 &\mathcal{D}& 
+		\end{tikzcd}
+		\end{center}
+		commutes.
+	\end{lemma}
+	\begin{proof}
+	The proof is straightforward but interesting, thus is omitted. The reader is strongly recommended to work this out by hand.\footnote{``Dear reader: don't shy away from trying this, for it is excellent, indispensable practice. Miss this opportunity and you will forever feel unsure about such manipulations.'' -- Paolo Aluffi.}
+	\end{proof}
+	Natural transformations can also compose with each other, and there are two ways of compositions, called horizontal composition and vertical composition. We first state the strategy of these two compositions, and see what the explicit results of the compositions are later.
+	\begin{definition}[Vertical and Horizontal Compositions]
+	Given three parallel functors $F,G,H:\mathcal{C}\rightrightarrows\mathcal{D}$ and natural transformations $\alpha:F\Rightarrow G$, $\beta:G\Rightarrow H$, the \textbf{vertical composition} of $\beta$ and $\alpha $ is a natural transformation $\beta\cdot \alpha:F\Rightarrow H$. See the diagrams below:
+	\begin{center}
+		\begin{tikzcd}
+		&F\arrow[d,Rightarrow,"\alpha"]& \\
+			\mathcal{C}\arrow[rr,bend left=65]\arrow[rr]\arrow[rr,bend right=65]
+			&G\arrow[d,Rightarrow,"\beta"] &\mathcal{D}\\
+			&H &
+		\end{tikzcd}
+		$\xLongrightarrow{\text{Vertical composition}}$
+		\begin{tikzcd}
+		&F& \\
+			\mathcal{C}\arrow[rr,bend left=50]\arrow[rr,bend right=50]
+			&\Downarrow \beta\cdot\alpha &\mathcal{D}\\
+			&H &
+		\end{tikzcd}
+	\end{center}
+	Given Functors $F,G:\mathcal{C}\rightrightarrows\mathcal{D}$, $H,K:\mathcal{D}\rightrightarrows\mathcal{E}$ and natural transformations $\alpha:F\Rightarrow G$, $\beta:H\Rightarrow K$, the \textbf{horizontal composition} of $\beta$ and $\alpha$ is a natural transformation $\beta\ast\alpha:HF\Rightarrow KG$. See the diagrams below:
+	\begin{center}
+		\begin{tikzcd}
+		&F & &H &\\
+		\mathcal{C}\arrow[rr,bend left=50]\arrow[rr,bend right=50] &\Downarrow \alpha 
+		&\mathcal{D} \arrow[rr,bend left=50]\arrow[rr,bend right=50]
+		&\Downarrow\beta &\mathcal{E}\\
+		&G & &K &
+		\end{tikzcd}
+		$\xLongrightarrow{\text{Horizontal composition}}$
+		\begin{tikzcd}
+		&HF& \\
+			\mathcal{C}\arrow[rr,bend left=50]\arrow[rr,bend right=50]
+			&\Downarrow \beta\ast\alpha &\mathcal{E}\\
+			&KG &
+		\end{tikzcd}
+	\end{center}
+	\end{definition}
+	Let's begin with the vertical composition, with which we will be able to define the category of functors between two categories.
+	\begin{lemma}[vertical composition]
+	Given three parallel functors $F,G,H:\mathcal{C}\rightrightarrows \mathcal{D}$ and natural transformations $\alpha:F\Rightarrow G$, $\beta:G\Rightarrow H$, then the \textbf{vertical composition} $\beta\cdot\alpha$ of $\alpha$ and $\beta$, defined by the equation
+	\[(\beta\cdot\alpha)_c\coloneqq \beta_c\alpha_c,\ \ \forall c\in\Obj(\mathcal{C})\]
+	is a natural transformation from $F$ to $H$. 
+	\end{lemma}
+	\begin{proof}
+	It follows immediately from the fact that the diagram
+		\begin{center}
+			\begin{tikzcd}
+				Fc\arrow[r,"\alpha_c"]\arrow[d,swap,"Ff"]\arrow[rr,bend left=30,dashrightarrow,"(\beta\cdot\alpha)_c"]
+					& Gc\arrow[r,"\beta_c"]\arrow[d,swap,"Gf"]
+					& Hc\arrow[d,"Hf"]\\
+				Fc'\arrow[r,swap,"\alpha_{c'}"]\arrow[rr,swap,bend right=30,dashrightarrow,"(\beta\cdot\alpha)_{c'}"]
+					& Gc'\arrow[r,swap,"\beta_{c'}"]
+					&Hc'
+			\end{tikzcd}
+		\end{center}
+		commutes for any morphism $f:c\to c'$ of $\mathcal{C}$.
+	\end{proof}
+	One can learn immediately from the diagram above that if $\alpha$ and $\beta$ are both natural isomorphisms, so is $\beta\cdot \alpha$. Here comes the category of functors:
+	\begin{definition}[Category of Functors]
+	Given two category $\mathcal{C}$ and $\mathcal{D}$, then all functors from $\mathcal{C}$ to $\mathcal{D}$ consist a category, denoted by $\mathcal{D}^\mathcal{C}$, in which:
+		\begin{itemize}
+			\item Objects: All functors 	from $\mathcal{C}$ to $\mathcal{D}$.
+			\item Morphisms: All natural transformations between these functors.
+			\item Composition law: The vertical composition of natural transformations.
+		\end{itemize}
+	\end{definition}
+	Here are some immediate facts about $\mathcal{D}^\mathcal{C}$: The identity morphism for an object $F\in\Obj(\mathcal{D}^\mathcal{C})$ is the identity natural transformation $1_F:F\Rightarrow F$  defined by $(1_F)_c\coloneqq 1_{Fc}$. The isomorphisms are exactly natural isomorphisms, and given a natural isomorphism $\alpha:F\Rightarrow G$, its inverse $\alpha^{-1}:G\Rightarrow F$ is defined by $(\alpha^{-1})_c\coloneqq (\alpha_c)^{-1}$. Here we conclude that naturally isomorphic is an equivalence relation. If $\mathcal{D}$ has an initial object, then the constant functor at this initial object is initial in $\mathcal{D}^\mathcal{C}$. Dually, if $\mathcal{D}$ has a terminal object, then the constant functor at this terminal object is terminal in $\mathcal{D}^\mathcal{C}$.
+	\begin{remark}[sizes of functor categories]
+	Care should be taken when discussing functor categories. If $\mathcal{C}$ and $\mathcal{D}$ are both small, then $\mathcal{D}^\mathcal{C}$ is again a small category. However, if both are locally small, then $\mathcal{D}^\mathcal{C}$ needs not be locally small. One sufficient condition for $\mathcal{D}^\mathcal{C}$ to be locally small is that $\mathcal{C}$ is small and $\mathcal{D}$ is locally small: Given two functors $F,G\in\Obj(\mathcal{D}^\mathcal{C})$, then
+	\[\Hom_{\mathcal{D}^\mathcal{C}}(F,G)\subset \prod_{c\in\Obj(\mathcal{C})}\Hom_\mathcal{D}(Fc,Gc),\]
+	since a natural transformation $\alpha:F\Rightarrow G$ may be regarded as an element $(\alpha_c)_{c\in\Obj(\mathcal{C})}\in\prod_{c\in\Obj(\mathcal{C})}\Hom_\mathcal{D}(Fc,Gc)$.
+	\end{remark}
+	Before entering the horizontal composition, we may want to introduce to the reader the concept of equivalences of categories. 
+	\begin{definition}[Equivalence of Categories]
+	Given categories $\mathcal{C}$ and $\mathcal{D}$. An \textbf{equivalence of categories} (between $\mathcal{C}$ and $\mathcal{D}$) consists of two functors $F:\mathcal{C}\to\mathcal{D}$ and $G:\mathcal{D}\to\mathcal{C}$ with natural isomorphisms $\eta:1_\mathcal{C}\cong GF$ and $\epsilon:FG\cong 1_\mathcal{D}$. If there exists an equivalence between $\mathcal{C}$ and $\mathcal{D}$, then $\mathcal{C}$ and $\mathcal{D}$ are said to be \textbf{equivalent}. 
+	\end{definition}
+	Equivalent between categories \textsl{is} an equivalence relation. The reflexive and symmetry are immediate, but a direct proof to the transitivity is difficult. We may want to use some properties of functors to avoid that:
+	\begin{definition}[Full, Faithful and Essentially Surjective on Objects]
+	A functor $F:\mathcal{C}\to \mathcal{D}$ is
+		\begin{itemize}
+			\item \textbf{full} if for each $x,y\in\Obj(\mathcal{C})$, the map $\Hom_\mathcal{C}(x,y)\to\Hom_\mathcal{D}(Fx,Fy):f\mapsto Ff$ is surjective;
+			\item \textbf{faithful} if for each $x,y\in\Obj(\mathcal{C})$, the map $\Hom_\mathcal{C}(x,y)\to\Hom_\mathcal{D}(Fx,Fy):f\mapsto Ff$ is injective;
+			\item \textbf{essentially surjective on objects} if for every object $d\in\Obj(\mathcal{D})$, there exists some $c\in\Obj(\mathcal{C})$ s.t. $d\cong Fc$.
+		\end{itemize}
+	\end{definition}
+	One can verify easily that the composition of two full (faithful, or essentially surjective on objects) functors is again full (faithful, or essentially surjective on objects, respectively). Therefore, the theorem below yields the transitivity of equivalent between categories:
+	\begin{theorem}[characterizing equivalences of categories]
+		Functors in an equivalence of categories are full, faithful, and essentially surjective on objects. Conversely, any functor with these properties produces an equivalence of categories.\footnote{Here we assumed the axiom of choice.} In particular, two categories are equivalent if and only if there is a functor between them which is full, faithful, and essentially surjective on objects.
+	\end{theorem}
+	The proof of this theorem used many techniques of diagram chasing, and is too long to be put in this thesis, for it won't be what we mainly concern about. For a complete proof, see Theorem 1.5.9, Riehl, \textsl{Category Theory in Context}.
+	\begin{remark}
+		For locally small categories, one may regard that two categories are equivalent if and only if they are isomorphic in the category of locally small categories with morphisms the equivalence classes of functors modulo the equivalence relation of naturally isomorphic, i.e., the category in which:
+		\begin{itemize}
+			\item Objects: All locally small categories.
+			\item Morphisms: All equivalence classes of functors between these categories modulo naturally isomorphic. i.e., a morphism is a collection $[F]$ consists of all functors naturally isomorphic to $F$.
+			\item Composition law: Given two morphisms $[F]$ and $[G]$ with $F$ and $G$ composable, then 
+			\[[G][F]\coloneqq [GF].\]
+		\end{itemize}
+		We shall see immediately that the composition in this category is well-defined (i.e., if $F\cong F'$ and $G\cong G'$, then $GF\cong G'F'$), after the construction of horizontal composition is given.
+	\end{remark}
+	Here comes the horizontal composition:
+	\begin{lemma}[horizontal composition]
+	Given everything in the diagram
+	\begin{center}
+		\begin{tikzcd}
+		&F & &H &\\
+		\mathcal{C}\arrow[rr,bend left=50]\arrow[rr,bend right=50] &\Downarrow \alpha 
+		&\mathcal{D} \arrow[rr,bend left=50]\arrow[rr,bend right=50]
+		&\Downarrow\beta &\mathcal{E}\\
+		&G & &K &
+		\end{tikzcd}
+	\end{center}
+	then the \textbf{horizontal composition} $\beta\ast\alpha$ of $\alpha$ and $\beta$, defined by the equation
+	\[(\beta\ast\alpha)_c\coloneqq (\beta_{Gc})(H\alpha_c)=(K\alpha_c)(\beta_{Fc}),\]
+	i.e., the diagonal of the commutative diagram
+	\begin{center}
+		\begin{tikzcd}
+			HFc\arrow[r,"\beta_{Fc}"]\arrow[d,swap,"H\alpha_c"]\arrow[dr,dashrightarrow,"(\beta\ast\alpha)_c"]
+				&KFc\arrow[d,"K\alpha_c"]\\
+				HGc\arrow[r,swap,"\beta_{Gc}"]
+					&KGc
+		\end{tikzcd}
+	\end{center}
+	is a natural transformation from $HF$ to $KG$.
+	\end{lemma}
+	\begin{proof}
+	Again, it follows immediately from the fact that the diagram
+	\begin{center}
+		\begin{tikzcd}
+			HFc\arrow[r,"H\alpha_c"]\arrow[rr,bend left=30, dashrightarrow,"(\beta\ast\alpha)_c"]\arrow[d,swap,"HFf"]
+				&HGc\arrow[r,"\beta_{Gc}"]\arrow[d,swap,"HGf"]
+				&KGc\arrow[d,"KGf"]\\
+			HFc'\arrow[r,swap,"H\alpha_{c'}"]\arrow[rr,bend right=30,swap,dashrightarrow,"(\beta\ast\alpha)_{c'}"]
+				&HGc'\arrow[r,swap,"\beta_{Gc'}"]
+				&KGc'
+		\end{tikzcd}
+	\end{center}
+	commutes for any morphism $f:c\to c'$ of $\mathcal{C}$, as one can verify.
+	\end{proof}
+	Finnally, and importantly, vertical and horizontal composition are compatible: the order how the composition is done does not matter. That is, they satisfy the rule of \textbf{middle four interchange}:
+	\begin{lemma}[middle four interchange]
+	Given functors and natural transformations
+	\begin{center}
+		\begin{tikzcd}
+		&F\arrow[d,Rightarrow,"\alpha"]& &J\arrow[d,Rightarrow,"\gamma"] &\\
+			\mathcal{C}\arrow[rr,bend left=65]\arrow[rr]\arrow[rr,bend right=65]
+			&G\arrow[d,Rightarrow,"\beta"] 
+			&\mathcal{D}\arrow[rr,bend left=65]\arrow[rr]\arrow[rr,bend right=65]
+			&L\arrow[d,Rightarrow,"\delta"] &\mathcal{E} \\
+			&H & &L &
+		\end{tikzcd}
+	\end{center}
+	the two natural transformations $(\delta\cdot\gamma)\ast(\beta\cdot\alpha),(\gamma\ast\alpha)\cdot(\delta\ast\beta):JF\Rightarrow LH$ are exactly the same:
+	\begin{center}
+		\begin{tikzcd}
+		&F& &J &\\
+			\mathcal{C}\arrow[rr,bend left=50]\arrow[rr,bend right=50]
+			&\Downarrow \beta\cdot\alpha 
+			&\mathcal{D}\arrow[rr,bend left=50]\arrow[rr,bend right=50]
+			&\Downarrow\delta\cdot\gamma &\mathcal{E} \\
+			&H & &L &
+		\end{tikzcd}
+		$=$
+		\begin{tikzcd}
+		&JF\arrow[d,Rightarrow,"\gamma\ast\alpha"]& \\
+			\mathcal{C}\arrow[rr,bend left=55]\arrow[rr]\arrow[rr,bend right=55]
+			&KG\arrow[d,Rightarrow,"\delta\ast\beta"] &\mathcal{E}\\
+			&LH &
+		\end{tikzcd}
+	\end{center}
+	\end{lemma}
+	\begin{proof}
+		It is nothing but the fact that the diagram
+		\begin{center}
+			\begin{tikzcd}
+				JFc\arrow[d,"J\alpha_c"]\arrow[dd,bend right,dashrightarrow, swap,"J(\beta\cdot\alpha)_c"]\arrow[ddrr,bend left=60,dashrightarrow, "(\delta\cdot\gamma)\ast(\beta\cdot\alpha)_c"] \arrow[dr,dashrightarrow,"(\gamma\ast\alpha)_c"]& &\\
+				JGc\arrow[r,"\gamma_{Gc}"]\arrow[d,"J\beta_c"]
+					&KGc\arrow[d,"K\beta_c"]\arrow[dr,dashrightarrow,"(\delta\ast\beta)_c"]&\\
+				JHc\arrow[r,swap,"\gamma_{Hc}"]\arrow[rr,dashrightarrow, bend right,swap,"(\delta\cdot\gamma)_{Hc}"]
+					&KHc\arrow[r,swap,"\delta_{Hc}"]
+					&LHc
+			\end{tikzcd}
+		\end{center}
+		commutes for any $c\in\Obj(\mathcal{C})$, as one can verify.
+	\end{proof}
+\newpage
+\section{Representable Functors and the Yoneda Lemma}
+Remind the functors we gave in Example 2.1.(i): given $c\in\Obj(\mathcal{C})$ where $\mathcal{C}$ is locally small, then there are two functors $\Hom_\mathcal{C}(c,-):\mathcal{C}\to\mathrm{Set}$ and $\Hom_\mathcal{C}(-,c):\mathcal{C}^{op}\to \mathrm{Set}$. We called them functors represented by $c$. However, the concept of representable is able to be generalized, and these two functors are so special and so important that we have much to say even for the generalized concept. In this seciton we give the definition of representable functors and 	raise a few questions to be solved in the next section. We will give an introduction to their solutions in this section, though: we will introduce the Yoneda lemma.
+	\begin{definition}[Representable Functors]
+		A covariant (or contravariant) functor $F$ from a locally small category $\mathcal{C}$ to $\mathrm{Set}$ is said to be \textbf{representable} if there exists an object $c\in\Obj(\mathcal{C})$ s.t. there is a natural isomorphism between $F$ and the functor $\Hom_\mathcal{C}(c,-)$ (or $\Hom_\mathcal{C}(-,c)$, respectively), in which case we say that the functor $F$ is \textbf{represented by} the object $c$. A \textbf{representation} for a representable covariant (or contravariant) functor $F$ is a choice of $c\in\Obj(\mathcal{C})$ together with a specified natural isomorphism $\Hom_\mathcal{C}(c,-)\cong F$ (or $\Hom_\mathcal{C}(-,c)\cong F$, respectively).
+	\end{definition}
+	Note that the domain $\mathcal{C}$ of a representable functor is required to be locally small, so that the hom-functors $\Hom_\mathcal{C}(c,-)$ and $\Hom_\mathcal{C}(-,c)$ do send objects of $\mathcal{C}$ to sets.
+	\begin{example}
+	Here comes some examples of representable functors which we have already got familiar with.
+		\begin{enumerate}[label=(\roman*)]
+			\item The identity functor $1_\mathrm{Set}:\mathrm{Set}\to\mathrm{Set}$ is represented by the singleton set $1$. The natural isomorphism $\Hom_\mathrm{Set}(1,-)\cong 1_\mathrm{Set}$ consists of maps $\Hom_\mathrm{Set}(1,X)\to X$ that maps each element in $\Hom_\mathrm{Set}(1,X)$ to the unique element in its image in $X$. One can verify easily that the diagram 
+			\begin{center}
+			\begin{tikzcd}
+	  			\Hom_\mathrm{Set}(1,X)\arrow[d,swap,"f_*"] \arrow[r,"\cong"] 
+	 			&X \arrow[d,"f"]\\
+				\Hom_\mathrm{Set}(1,Y)\arrow[r,swap,"\cong"] 
+				&Y
+			\end{tikzcd}
+			\end{center}
+		commutes. For this reason, one may denote an element in $\Hom_\mathrm{Set}(1,X)$ by its image, i.e., $x\in X$ may also denote the function $x:1\to X:1\mapsto x$.
+		\item The forgetful functor $U:\mathrm{Grp}\to \mathrm{Set}$ is represented by the additive group $\mathbb{Z}$. The natural isomorphism $\Hom_\mathrm{Grp}(\mathbb{Z},-)\cong U$ consists of bijections $\Hom_\mathrm{Grp}(\mathbb{Z},G)\to UG:\varphi\mapsto \varphi(1)$. The bijectivity follows from that a group homomorphism from $\mathbb{Z}$ to $G$ is determined by the image of $1$ the generator of $\mathbb{Z}$. We will see that $\mathbb{Z}$ is the \textbf{free group on a single generator} after we define free groups.
+		\item *For a generalization to (ii): Given an index set $J$. The functor $U(-)_J:\mathrm{Grp}\to\mathrm{Set}$ that sends a group $G$ to the set of $J$-tuples of elements of $G$ is represented by the \textbf{free group $F(J)$ on $J$}. Similarly, the functor $U(-)_J:\mathrm{Ab}\to \mathrm{Set}$ is represented by the \textbf{free abelian group $\bigoplus_{j\in J}\mathbb{Z}_j$ on $J$}.\footnote{$\bigoplus_{j\in J}\mathbb{Z}_j$ is denoted as $\mathbb{Z}^{\oplus J}$ in \textsl{Algebra: Chapter 0}}
+		\end{enumerate}
+	\end{example}
+	As the notion of representation is given, here raises a few questions:
+	\begin{itemize}
+		\item If two objects represent a same functor, are they isomorphic?
+		\item What data is involved in the construction of a natural isomorphism in the representation of a functor $F$?
+		\item *To reader who has known something about universal properties: we assert that the universal property of an object in a locally samll category can be expressed by representable functors. How do the universal property expressed by functors relate to initial and terminal objects?
+	\end{itemize}
+	The answer to the first question is ``yes''. One may prove it by hand right now, but we shall not put the proof here; it happens to be an immediate result of Yoneda lemma. The Yoneda lemma also provides insights for the other two questions. In fact, the Yoneda lemma is arguably the most important result in category theory:\footnote{``... although it takes some time to explore the depths of the consequences of this simple statement.'' -- Emily Riehl.}
+	\begin{theorem}(Yoneda lemma)
+		For any functor $F:\mathcal{C}\to \mathrm{Set}$ whose domain $\mathcal{C}$ is locally small, for any object $c\in\Obj(\mathcal{C})$, the function $\Phi:\Hom_{\mathrm{Set}^{\mathcal{C}}}(\Hom_\mathcal{C}(c,-),F)\to Fc:\alpha\mapsto \alpha_c(1_c)$ is a bijection, concluding that
+		\[\Hom_{\mathrm{Set}^\mathcal{C}}(\Hom_\mathcal{C}(c,-),F)\cong Fc,\]
+		hence $\Hom_{\mathrm{Set}^\mathcal{C}}(\Hom_\mathcal{C}(c,-),F)$ is a set. Moreover, $\Phi$ is natural with respect to both $c$ and $F$, i.e., seen as the component of a natural isomorphism at the object $(c,F)\in\Obj(\mathcal{C}\times\mathrm{Set}^\mathcal{C})$, it consists a natural isomorphism between bifunctors:
+		\[\Hom_{\mathrm{Set}^\mathcal{C}}(\Hom_\mathcal{C}(\circ,-),\diamond):\mathcal{C}\times\mathrm{Set}^\mathcal{C}\to \mathrm{Set}:(c,F)\mapsto \Hom_{\mathrm{Set}^{\mathcal{C}}}(\Hom_\mathcal{C}(c,-),F)\]
+		and
+		\[ev:\mathcal{C}\times\mathrm{Set}^\mathcal{C}\to \mathrm{Set}:(c,F)\mapsto Fc.\]
+	\end{theorem}
+	\begin{proof}
+		The main point is to construct the inverse $\Psi:Fc\to\Hom_\mathcal{\mathrm{Set}^\mathcal{C}}(\Hom_\mathcal{C}(c,-),F)$ of $\Phi$. Elements in the codomain of $\Psi$ are natural transformations from $\Hom_\mathcal{C}(c,-)$ to $F$, hence given $x\in Fc$, we proceed by defining each component of the natural transformation $\Psi(x):\Hom_\mathcal{C}(c,-)\Rightarrow F$. In order to make $\Psi$ the inverse of $\Phi$, there must be $\Psi(x)_c(1_c)=\Phi(\Psi(x))=x$. For any $d\in\Obj(\mathcal{C})$, if $\Hom_\mathcal{C}(c,d)=\varnothing$, then we simply let $\Psi(x)_d$ be the empty function; if $\Hom_\mathcal{C}(c,d)$ is non-empty, then for any $f\in\Hom_\mathcal{C}(c,d)$, the diagram
+		\begin{center}
+			\begin{tikzcd}
+	  			\Hom_\mathcal{C}(c,c)\arrow[d,swap,"f_*"] \arrow[r,"\Psi(x)_c"] 
+	 			&Fc \arrow[d,"Ff"]\\
+				\Hom_\mathcal{C}(c,d)\arrow[r,swap,"\Psi(x)_d"] 
+				&Fd
+			\end{tikzcd}
+			\end{center}
+			must commute. In particular, $\Psi(x)_d(f)=\Psi(x)_d(f_*(1_c))=Ff\circ\Psi(x)_c(1_c)=Ff(x)$. Therefore, we have defined $\Psi$:
+			\[\Psi:Fc\to\Hom_{\mathrm{Set}^\mathcal{C}}(\Hom_\mathcal{C}(c,-),F)\ \ \ \ \ \Psi(x)_d(f)\coloneqq Ff(x),\ \ \forall f\in\Hom_\mathcal{C}(c,d),\ \ \forall d\in\Obj(\mathcal{C}),\ \ \forall x\in Fc.\]
+			It remains to verify that $\Psi(x)$ is natural, and that $\Psi\circ\Phi(\alpha)=\alpha$. Both are straightforward, hence are left to the reader; note that a natural transformation from $\Hom_\mathcal{C}(c,-)$ to $F$ is determined by the image of $1_c$ of its component at $c$, as we have shown in the construction of $\Psi$.\par
+			The naturality of $\Phi$ is again nothing but to check the diagram
+			\begin{center}
+			\begin{tikzcd}
+	  			\Hom_{\mathrm{Set}^\mathcal{C}}(\Hom_\mathcal{C}(c,-),F)\arrow[d,swap,"(f^{**}{,}\alpha_*)"] \arrow[r,"\Phi_{(c,F)}"] 
+	 			&Fc \arrow[d,"(\alpha_d)(Ff)=(Gf)(\alpha_c)"]\\
+			\Hom_{\mathrm{Set}^\mathcal{C}}(\Hom_\mathcal{C}(d,-),G)\arrow[r,swap,"\Phi_{(d,G)}"] 
+				&Gd
+			\end{tikzcd}
+			\end{center}
+			commutes, hence is left to the reader.\footnote{For a complete proof of the Yoneda lemma, c.f. Emily Riehl, \textsl{Category Theory in Context}, Theorem 2.2.4.}
+	\end{proof}
+	There is a dual version of the Yoneda lemma, in which the functor $F$ is a contravariant functor from $\mathcal{C}$ to $\mathrm{Set}$, but there is no need to list it alone: it can be accessed immediately by applying the original Yoneda lemma to the functor $F:\mathcal{C}^{op}\to \mathrm{Set}$ (seen as a covariant functor with domain $\mathcal{C}^{op}$), and using the fact that $\Hom_{\mathcal{C}^{op}}(c,-)=\Hom_\mathcal{C}(-,c)$. \par
+	To emphasis, the Yoneda lemma tells us that there are only a set's worth of natural transformations between $F$ and $\Hom_\mathcal{C}(c,-)$. An immediate application of the Yoneda lemma gives the Yoneda embeddings:
+	\begin{corollary}[Yoneda embedding]
+		The functors
+		\begin{center}
+	\begin{tikzcd}
+	\mathcal{C}\arrow[r,hook,"y"]
+	 & \mathrm{Set}^{\mathcal{C}^{op}}\\[-15pt]
+	 c\arrow[d,swap,"f",""{name=A,below}] 
+	 &\Hom_\mathcal{C}(-,c) \arrow[d,"f_*",""{name=B,below}]\\
+	 d
+		&\Hom_\mathcal{C}(-,d)
+		\arrow[mapsto, from=A,to=B,shorten <= 1.3em, shorten >= 3em]
+	\end{tikzcd}\ \ \ \ \ \ \ \ \ 
+	\begin{tikzcd}
+	\mathcal{C} ^{op}\arrow[r,hook,"y"]
+	 & \mathrm{Set}^\mathcal{C}\\[-15pt]
+	 c\arrow[d,swap,"f",""{name=A,below}] 
+	 &\Hom_\mathcal{C}(c,-) \\
+	 d
+		&\Hom_\mathcal{C}(d,-)\arrow[u,swap,"f^*",""{name=B,below}]
+		\arrow[mapsto, from=A,to=B,shorten <= 1.3em, shorten >= 3em]
+	\end{tikzcd}
+	\end{center}
+	are both full and faithful. They are called the covariant and contravariant \textbf{Yoneda embeddings}. 
+	\end{corollary}
+	As a simple application of the Yoneda embeddings, we may reprove the Cayley's theorem:
+	\begin{corollary}[Cayley's Theorem]
+	 Any group is isomorphic to a subgroup of a permutation group.
+	\end{corollary}
+	\begin{proof}
+		Given a group $G$, regard it as the one-object category $\mathrm{B}G$. The covariant Yoneda embedding tells us that the embedding
+		\begin{center}
+	\begin{tikzcd}
+	\mathrm{B}G\arrow[r,hook,"y"]
+	 & \mathrm{Set}^{\mathrm{B}G^{op}}\\[-15pt]
+	 \bullet\arrow[d,swap,"g",""{name=A,below}] 
+	 &\Hom_{\mathrm{B}G}(-,\bullet) \arrow[d,"g_*",""{name=B,below}]\\
+	 \bullet
+		&\Hom_{\mathrm{B}G}(-,\bullet)
+		\arrow[mapsto, from=A,to=B,shorten <= 1.3em, shorten >= 3em]
+	\end{tikzcd}
+	\end{center}
+	is full and faithful. Note that the forgetful functor $U:\mathrm{Set}^{\mathrm{B}G^{op}}\to \mathrm{Set}:F\mapsto F\bullet$ is also faithful. Since $\Hom_{\mathrm{B}G}(\bullet,\bullet)=G$, the composition $Uy$ yields that any $G$-equivariant\footnote{c.f. Example 3.1.(iii)} endomorphism on the $G$-set $G$ is an automorphism in the category $\mathrm{Set}$, and that the set $G_{eq}$ of $G$-equivariant endomorphisms on the $G$-set $G$ endowed with the binary operation of composition of set-functions is a group isomorphic to $G$. The fact that $G_{eq}$ is a subgroup of $\Aut_\mathrm{Set}(G)=\Sym(G)$ finishes our proof.
+	\end{proof}

@@ -1,0 +1,136 @@
+\section{Universal Property}
+In this section we introduce the universal property. We shall see that the idea of universal property has already played an important role (which we haven't discovered, though) in our previous study of abstract algebra, and it can not (and should not) be avoid if we want to proceed further. We will focus only on the universal properties of objects in locally small categories, since non-locally-small categories tend to be rare in many other mathematics. Also, for locally small categories, we have a very fancy definition for the universal property. However, to begin with, we will still introduce the general definition of universal property to the reader. It tends to be ambiguous to people who never saw it before, though:
+\begin{definition}[Universal Property]
+A certain mathematical object (or construction) is said to satisfy (or have) a \textbf{universal property}, if it could be seen as (a part of) an initial or terminal object of some other category. In particular, an initial or terminal object automatically satisfies an evident universal property. 
+\end{definition}
+Here by a mathematical object we mean things to be operated, such as numbers, sets, groups, etc. An explicit definition for mathematical objects is the job for philosophy, hence we shall not be bothered with that. Also, by ``could be seen'' we usually leave the object unchanged but attatch some constructions on it and generalize the whole to be objects of a category, with morphisms induced from morphisms in the category where the original object is taken from. When we say something satisfies a universal property, the context should be clear enough for the reader to figure out in what kind of category is the object universal. Now we give some examples for expressing universal properties. 
+\begin{example}
+	\begin{enumerate}[label=(\roman*)]
+		\item Given a group homomorphism $\varphi:G\to H$, its kernel is universal respect to the following property: for any group homomorphism $g:K\to G$ s.t. $\varphi\circ g=0$, there exists a unique group homomorphism $\tilde g:K\to \ker \varphi$ s.t. $i\circ\tilde g=g$, where $i:\ker\varphi\to G$ is the inclusion. In other words, $\ker \varphi$ could be seen as the terminal object in the category where
+			\begin{itemize}
+				\item Objects: Group homomorphisms $g:K\to G$ s.t. $\varphi\circ g=0$;
+				\item Morphisms: Given two objects $f:W\to G$, $g:K\to G$, a morphism from $f$ to $g$ is a group homomorphism $h:W\to K$ s.t. $g\circ h=f$, i.e., the diagram
+				\begin{tikzcd}
+				W\arrow[r,"f"]\arrow[dr,swap,"h"]&G\\
+				&K\arrow[u,swap,"g"]
+				\end{tikzcd}
+				commutes.
+			\end{itemize}
+		\item Given a group $G$, then its commutation $\tilde G\coloneqq G/[xyx^{-1}y^{-1}:x,y\in G]$, where $[xyx^{-1}y^{-1}:x,y\in G]$ stands for the least normal group containing $\{xyx^{-1}y^{-1}:x,y\in G\}$ (in this case it is exactly the set $\{xyx^{-1}y^{-1}:x,y\in G\}$), is universal respect to the following property: for any group homomorphism $\varphi:G\to A$ where $A$ is abelian, there exists a unique group homomorphism $\tilde \varphi:\tilde G\to A$ s.t. $\tilde\varphi\circ\pi=\varphi$, where $\pi:G\to \tilde G$ is the quotient map. In other words, $\tilde G$ could be seen as the initial object in the category where
+			\begin{itemize}
+				\item Objects: Group homomorphisms $g:G\to A$ where $A$ is abelian;
+				\item Morphisms: Given two objects $f:G\to H$, $g:G\to A$, a morphism from $f$ to $g$ is a group homomorphism $h:H\to A$ s.t. $h\circ f=g$, i.e., the diagram
+				\begin{tikzcd}
+				G\arrow[r,"g"]\arrow[d,swap,"f"]&A\\
+				H\arrow[ur,swap,"h"]
+				\end{tikzcd}
+				commutes.
+				\end{itemize}
+		\item Given two sets $A$ and $B$, then their cartesian product $A\times B$ is universal with respect to the following property: for any two set-functions $f:C\to A$, $g:C\to B$, there exists a unique function $h:C\to A\times B$ s.t. $\pi_A\circ h=f$ and $\pi_B\circ h=g$, where $\pi_A:A\times B\to A:(a,b)\mapsto a$, $\pi_B:A\times B\to B:(a,b)\mapsto b$ are called the projection maps. In other words, $A\times B$ could be seen as the terminal object in the category where
+			\begin{itemize}
+				\item Objects: Triples $(f,g,C)$, where $f:C\to A$, $g:C\to B$ are set functions, $C$ stands for an arbitrary set;
+				\item Morphisms: Given two objects $(f_1,g_1,C_1)$, $(f_2,g_2,C_2)$, a morphism from $(f_1,g_1)$ to $(f_2,g_2)$ is a set function $h:C_1\to C_2$ s.t. $f_2\circ h=f_1$, $g_2\circ h=g_1$, i.e. the diagram
+				\begin{tikzcd}
+				&&A\\
+				C_1\arrow[urr,bend left=20,"f_1"]\arrow[drr,bend right=20,swap,"g_1"]\arrow[r,"h"]&C_2\arrow[ur,"f_2"]\arrow[dr,swap,"g_2"]&\\
+				&&B
+				\end{tikzcd}
+				commutes.
+			\end{itemize}
+	The cartesian product of sets is a special case of product. The product is a very important universal property, which we shall explore in the next section.
+	\end{enumerate}
+\end{example}
+There are many other familiar examples, such as the kernel of linear maps, the product of groups, the product topology, etc. All of which, along with those have been listed above, belong to a kind of special universal property, called limits and colimits. Hence we pause here, and leave a further discussion to the next section. We have already known that initial (or terminal) objects in a certain category are all isomorphic canonically, hence we can use the universal property of an object to re-define the object itself, which gives a definition up to canonical isomorphic. In fact, that is exactly what we are doing most of the time, even without knowing an object priorily. Note that we need to verify the existence of such object if we define something new using universal property. 
+\begin{example}Here comes some examples for defining things using universal property.
+	\begin{enumerate}[label=(\roman*)]
+		\item Given a group homomorphism $\varphi:G\to H$. The \textbf{cokernel} of $\varphi$, denoted by $\coker \varphi$, is the codomain of the initial object in the category where
+			\begin{itemize}
+				\item Objects: All group homomorphisms $f:H\to K$ s.t. $f\circ \varphi=0$;
+				\item Morphisms: Given two objects $f_1:H\to K_1$, $f_2:H\to K_2$, a morphism from $f_1$ to $f_2$ is a group homomorphism $h:K_1\to K_2$ s.t. $h\circ f_1=f_2$, i.e., the diagram 
+				\begin{tikzcd}
+				H\arrow[r,"f_1"]\arrow[dr,swap,"f_2"]&K_1\arrow[d,"h"]\\
+				&K_2
+				\end{tikzcd}
+			commutes.
+			\end{itemize}
+		The reader may verify that $H/[\Ima\varphi]$ is the cokernel of $\varphi$, using some abstract algebra. 
+		\item Given a set $A$. The \textbf{free group} on $A$, denoted by $F(A)$, is the codomain of the initial object in the category where
+			\begin{itemize}
+				\item Objects: All set-functions $f:A\to G$, where $G$ is a group;
+				\item Morphisms: Given two objects $f:A\to G$ and $g:A\to H$, a morphism from $f$ to $g$ is a group homomorphism $h:G\to H$ s.t. $h\circ f=g$, i.e., the diagram
+				\begin{tikzcd}
+				G\arrow[r,"h"]&H\\
+				A\arrow[u,"f"]\arrow[ur,swap,"g"]
+				\end{tikzcd}
+				commutes.
+			\end{itemize}
+		\item Given a set $A$. The \textbf{free abelian group} on $A$, denoted by $F^{ab}(A)$, is the codomain of the initial object in the category where
+			\begin{itemize}
+				\item Objects: All set-functions $f:A\to G$, where $G$ is an abelian group;
+				\item Morphisms: Given two objects $f:A\to G$ and $g:A\to H$, a morphism from $f$ to $g$ is a group homomorphism $h:G\to H$ s.t. $h\circ f=g$, i.e., the diagram
+				\begin{tikzcd}
+				G\arrow[r,"h"]&H\\
+				A\arrow[u,"f"]\arrow[ur,swap,"g"]
+				\end{tikzcd}
+				commutes.
+			\end{itemize}
+
+	\end{enumerate}
+	For an explicit construction for free groups and free abelian groups, see either $\S$5, Chapter II, \textsl{Algebra: Chapter 0} or $\S$67 and $\S$69, Chapter 11, \textsl{Topology}. One will see that $F^{ab}(A)\cong \oplus_{j\in A}\mathbb{Z}_j$, where the latter stands for the direct sum of $\mathbb{Z}$ (see $\S$67, \textsl{Topology}, or see the next section), and is also denoted by $\mathbb{Z}^{\oplus A}$, hence we may refer to the free abelian group on $A$ simply by $\mathbb{Z}^{\oplus A}$.
+\end{example}
+
+\begin{remark}
+Free groups provide us a new way to deal with groups: every group can be seen as (up to isomorphic) a free group modulo a normal subgroup. If $G\cong F(A)/R$, then $F(A)/R$ along with the isomorphism is called a \textbf{presentation} of group $G$. A group might have a number of very different presentations, while there must be at least one presentation for a group: the free group on the underlying set of group $G$, by the first isomorphism theorem, will do. See the diagram below.
+\begin{center}
+	\begin{tikzcd}
+		F(G)\arrow[r,dashed,two heads,"\exists!"]&G\\
+		G\arrow[u,"j"]\arrow[ur,swap,"id_G"]
+	\end{tikzcd}
+\end{center}
+\end{remark}
+Now we may be ready for our fancy definition of universal property on locally small categories. Recall the bijective relation $\Hom_{\mathrm{Set}^{\mathcal{C}}}(\Hom_\mathcal{C}(c,-),F)\cong Fc$ in the Yoneda lemma:
+\begin{definition}[Universal Property]
+	A \textbf{universal property} of an object $c\in \Obj(\mathcal{C})$ is (expressed by) a functor $F$ represented by $c$. More explicitly, a universal property of an object $c\in \mathcal{C}$ is a pair $(F,x)$ where $F$ is a  representable functor and $x\in Fc$ gives a natural isomorphism $\Hom_\mathcal{C}(c,-)\cong F$ or $\Hom_\mathcal{C}(-,c)\cong F$ via the Yoneda lemma.
+\end{definition}
+In particular, $\Hom_\mathcal{C}(c,-)$ (or $\Hom_\mathcal{C}(-,c)$) is a universal property of $c\in \Obj(\mathcal{C})$ (be aware of the choice of which category $\mathcal{C}$ the object $c$ is in), and the reader should have no difficulty translating the general definition to this fancy one; examples will be given right away. To translate this fancy definition to the general one, that is, to find a category and an initial or terminal object out from a representable functor (along with its representation), we need to establish a special kind of category, called \textbf{the category of elements}. 
+\begin{example} We first gives some example of translations by pointing out the representable functor and its representation; the details are left to the reader.
+	\begin{enumerate}[label=(\roman*)]
+		\item Given a group homomorphism $\varphi:G\to H$, the universal property of its kernel is expressed by the functor $F:\mathrm{Grp}\to \mathrm{Set}:K\mapsto \{f\in\Hom_\mathrm{Grp}(K,G):\varphi\circ f=0\}$, which is represented by $\Hom_\mathrm{Grp}(-,\ker\varphi)$. The universal element is the inclusion map $j:\ker \varphi\hookrightarrow G$. 
+		\item Given a group $G$, then the universal property of its commutation $\tilde G$ is expressed by the functor $F:\mathrm{Ab}\to \mathrm{Set}:H\mapsto \Hom_\mathrm{Grp}(G,H)$, which is represented by $\Hom_\mathrm{Ab}(\tilde G,-)$. The universal element is the quotient map $\pi:G\to \tilde G$.
+		\item Given two sets $A$ and $B$, the universal property of their product $A\times B$ is expressed by the functor $F:\mathrm{Set}\to \mathrm{Set}:S\mapsto \{(f,g):f\in\Hom_\mathrm{Set}(S,A),g\in\Hom_\mathrm{Set}(S,B)\}$, which is represented by the $\Hom_\mathrm{Set}(-,A\times B)$. The universal element is the pair of projection maps $(\pi_A,\pi_B)$.
+	\end{enumerate}
+\end{example}
+\begin{definition}[Category of Elements]
+(Covariant) The \textbf{category of elements} of a covariant functor $F:\mathcal{C}\to \mathrm{Set}$, denoted by $\int F$, consists of 
+	\begin{itemize}
+		\item Objects: All pairs $(c,x)$ where $c\in\Obj(\mathcal{C})$ and $x\in Fc$;
+		\item Morphisms: Given two objects $(c,x)$ and $(c',x')$, a morphism $(c,x)\to (c',x')$ is a morphism $f:c\to c'$ of $\mathcal{C}$ s.t. $Ff(x)=x'$.	
+	\end{itemize}
+(Contravariant) The \textbf{category of elements} of a contravariant functor $F:\mathcal{C}^{op}\to\mathrm{Set}$, denoted by $\int F$, consists of
+	\begin{itemize}
+		\item Objects: All pairs $(c,x)$ where $c\in \Obj(\mathcal{C})$ and $x\in Fc$;
+		\item Morphisms: Given two objects $(c,x)$ and $(c',x')$, a morphism $(c,x)\to (c',x')$ is a morphism $f:c\to c'$ of $\mathcal{C}$ s.t. $Ff(x')=x$.
+	\end{itemize}
+\end{definition}
+The proposition below ends our translation question:
+\begin{proposition}A covariant set-valued (i.e., its codomain is $\mathrm{Set}$) functor is representable if and only if its category of elements has an initial object. Dually, a contravariant set-valued functor is representable if and only if its category of elements has a terminal object. Explicitly, the representation of a functor is initial (or terminal) in its category of elements.
+\end{proposition}
+\begin{proof}
+By duallity, we only prove the case where the functor $F:\mathcal{C}\to \mathrm{Set}$ is covariant. The necessity is easy to see: given representation $\alpha:\Hom_\mathcal{C}(c,-)\cong F$, then for any $(d,x)\in \Obj(\int F)$, the diagram 
+	\begin{center}
+		\begin{tikzcd}
+			\Hom_\mathcal{C}(c,c)\arrow[d,"f"]\arrow[r,"\alpha_c"]&Fc\arrow[d,"Ff"]\\
+			\Hom_\mathcal{C}(c,d)\arrow[r,"\alpha_d"]&Fd
+		\end{tikzcd}
+	\end{center}
+	commutes. We assert that $(c,\alpha_c(1_c))$ is initial. It suffices to show that there exists a unique $f:c\to d$ s.t. $Ff(\alpha_c(1_c))=x$. By the commutativity, $Ff(\alpha_c(1_c))=\alpha_d(f)$, and we are done by the bijectivity of $\alpha_d$.\\
+	Now given an initial object $(c,x)$ of $\int F$, we assert that the natural transformation $\alpha:\Hom_\mathcal{C}(c,-)\Rightarrow F$ given by $x$ via the Yoneda lemma is a natural isomorphism. In particular, $\alpha_c(1_c)=x$. For any $c'\in\Obj(\mathcal{C})$, we show that $\alpha_{c'}$ is a bijection. Again, the diagram
+	\begin{center}
+		\begin{tikzcd}
+			\Hom_\mathcal{C}(c,c)\arrow[d,"f"]\arrow[r,"\alpha_c"]&Fc\arrow[d,"Ff"]\\
+			\Hom_\mathcal{C}(c,c')\arrow[r,"\alpha_{c'}"]&Fc'
+		\end{tikzcd}
+	\end{center}
+	commutes. For any $x'\in Fc'$, since $(c,\alpha_c(1_c))$ is initial, there exists a unique $f:c\to c'$ s.t. $Ff(\alpha_c(1_c))=x'$. Since $Ff(\alpha_c(1_c))=\alpha_{c'}(f)$, the existence of such $f$ implies that $\alpha_{c'}$ is surjective, and the uniqueness implies that $\alpha_{c'}$ is injective.
+\end{proof}
+Before entering the next section, the reader is suggested to raise some familiar examples of universal property by hand, verify both the general definition and the fancy definition and write out the category of elements, comparing it with the category in the general definition.
