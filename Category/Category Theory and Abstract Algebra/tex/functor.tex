@@ -1,0 +1,155 @@
+\section{Functor}
+Before we state the definition of a functor, we state an important category first, the opposite category.
+	\begin{definition}[Opposite Category]
+	Given a category $\mathcal{C}$. The \textbf{opposite category} of $\mathcal{C}$, denoted by $\mathcal{C}^{op}$, is a category in which:
+		\begin{itemize}
+			\item Objects: All objects of $\mathcal{C}$.
+			\item Morphisms: All morphisms of $\mathcal{C}$ with their domain and codomain reversed. That is, given a morphism $f$ of $\mathcal{C}$, we denote its corresponding morphism in $\Mor(\mathcal{C}^{op})$ by $f^{op}$, then there is $\dom f^{op}=\cod f$ and $\cod f^{op}=\dom f$.
+				\item Composition law: The induced composition law in $\mathcal{C}$. That is, for any $f^{op},g^{op}$ morphisms of $\mathcal{C}^{op}$ with $\cod f^{op}=\dom g^{op}$, their composition is given by
+			\[g^{op}f^{op}=(fg)^{op},\]
+		where $fg$ is the composition of $f$ and $g$ in $\mathcal{C}$. 
+		\end{itemize}
+	\end{definition}
+	The opposite category gives us a categorical way to define the notion of opposite group:
+	\begin{definition}[Opposite Group]
+	Given a group $G$, seen as a category $\mathrm{B}G$. The \textbf{opposite group} of $G$ is the group $G^{op}$ whose induced category is the opposite category of $\mathrm{B}G$, namely
+	\[\mathrm{B}(G^{op})=(\mathrm{B}G)^{op}.\]
+	\end{definition}
+	We will see soon that the opposite group is a special case of ``left action'', and that every group $G$ is ``naturally isomorphic'' to its opposite group $G^{op}$ by the group homomorphism $\varphi:G\to G^{op}:g\mapsto g^{-1}$. \par
+	We now state what a functor is:
+	\begin{definition}[Covariant Functor]
+	Given two categories $\mathcal{C}$ and $\mathcal{D}$. A \textbf{covariant functor} $F$ from $\mathcal{C}$ to $\mathcal{D}$, denoted by $F:\mathcal{C}\to \mathcal{D}$, consists of:
+	\begin{itemize}
+		\item For each object $c\in \Obj(\mathcal{C})$, an object $Fc\in\Obj(\mathcal{D})$.
+		\item For each morphism $f\in\Mor(\mathcal{C})$, a morphism $Ff\in\Obj(\mathcal{D})$ with $\dom Ff=F\dom f$ and $\cod Ff=F\cod f$, i.e.
+		\[f:\dom f\to \cod f\ \ \ \ \mapsto\ \ \ \ Ff:F\dom f\to F\cod f.\]
+	\end{itemize}
+	s.t. 
+	\begin{itemize}
+		\item For any composable morphisms $f,g$ in $\mathcal{C}$, $(Fg)(Ff)=F(gf)$.
+		\item For each object $c$ in $\mathcal{C}$, $F(1_c)=1_{Fc}$.
+	\end{itemize}
+	The last two conditions for a functor are called \textbf{functoriality axioms}. The category $\mathcal{C}$ is called the \textbf{domain} of $F$, and $\mathcal{D}$ is called the \textbf{codomain} of $F$.
+	\end{definition}
+	\begin{definition}[Contravariant Functor]
+	A \textbf{contravariant functor} $F$ from $\mathcal{C}$ to $\mathcal{D}$ is a covariant functor $F:\mathcal{C}^{op}\to \mathcal{D}$. Functors have an evident way\footnote{We will soon see that natural transformations have two ways of composition.} of composition: Given functors $F:\mathcal{C}\to \mathcal{D}$ and $G:\mathcal{D}\to \mathcal{E}$, their composition $GF:\mathcal{C}\to \mathcal{E}$ is defined by
+	\[GFc\coloneqq G(Fc),\ \ \forall c\in\Obj(\mathcal{C})\]
+	and
+	\[GFf\coloneqq G(Ff),\ \ \forall f\in\Mor(\mathcal{C}).\]
+	\end{definition}
+	Usually, we would omit the word ``covariant'' and say only ``functor'' in place of ``covariant functor''. To avoid unnatural arrow-theoretic representations, a morphism in the domain of a contravariant functor $F:\mathcal{C}^{op}\to \mathcal{D}$ will always be depicted as an arrow $f:c\to c'$ in $\mathcal{C}$. Graphically, the mapping on morphisms given by a contravariant functor is depicted as follows:
+	\begin{center}
+	\begin{tikzcd}
+	\mathcal{C}\arrow[r,"F"]
+	 & \mathcal{D}\\[-15pt]
+	 c\arrow[d,swap,"f",""{name=A,below}] 
+	 &Fc \\
+	 c'
+		&Fc'\arrow[u,swap,"Ff",""{name=B,below}]
+		\arrow[mapsto, from=A, to=B,shorten <= 1.3em, shorten >= 1.5em]
+	\end{tikzcd}
+	\end{center}
+\par Considering the definition of group under the categorical view, we can now redefine what a group homomorphism is:
+	\begin{definition}[Group Homomorphism]
+	Given two groups $G$ and $H$ seen as categories, a \textbf{group homomorphism} $f$ from $G$ to $H$ is a functor $f:G\to H$.
+	\end{definition}
+	We now state a lemma about functors here, whose proof is immediate:
+	\begin{lemma}
+	Functors preserve isomorphisms.
+	\end{lemma}
+	With this lemma, we can redefine and extend the notion of an action of a group:
+	\begin{definition}[Action]
+	Let $G$ be a group, seen as the category $\mathrm{B}G$. Given a category $\mathcal{C}$. An \textbf{action} of $G$ on an object $X\in\Obj(\mathcal{C})$ is expressed by a functor $F:\mathrm{B}G\to \mathcal{C}$, under which the image of the only object of $\mathrm{B}G$ is $X$. To be explicit, each element $g\in G$ gives by $F$ a morphism $Fg\in\End_\mathcal{C}(X)$ (In fact, $\Aut_\mathcal{C}(X)$; see Corollary 2.1.1). For any two elements $h,g\in G$, there is $(Fh)(Fg)=F(hg)$; for the identity element $e\in G$, $Fe=1_X$.\par
+	When $\mathcal{C}=\mathrm{Set}$, the definition above coincidents with what we have defined to be an action of a group in the course of abstract algebra, and the object $X$ endowed with such an action is called a $G$\textbf{-set}. When $\mathcal{C}=\mathrm{Vect}_\mathbb{F}$, the object $X$ is called a $G$\textbf{-representation}. When $\mathcal{C}=\mathrm{Top}$, the object $X$ is called a $G$\textbf{-space}.\par
+	The action expressed by a functor $\mathrm{B}G\to \mathcal{C}$ is sometimes called a \textbf{left action}. A \textbf{right action} is expressed by a functor $\mathrm{B}G^{op}\to \mathcal{C}$. Given a right action of a group, then it induces a left action of this group's opposite group.
+	\end{definition}
+	Lemma 2.1 gives immediately that
+	\begin{corollary}
+	When a group $G$ acts (functorially) on an object $X$ of a category $\mathcal{C}$, its elements $g$ must act by automorphisms; moreover, the inverse of the automorphism given by $g$ is the automorphism given by $g^{-1}$.
+	\end{corollary}
+	\begin{example}
+	Here comes several examples of functors below:
+	\begin{enumerate}[label=(\roman*)]
+	\item Given a locally small category $\mathcal{C}$ and an object $c\in \Obj(\mathcal{C})$, then $c$ induces a functor $\Hom_{\mathcal{C}}(c,-):\mathcal{C}\to \mathrm{Set}$ and a contravariant functor $\Hom_{\mathcal{C}}(-,c):\mathcal{C}^{op}\to \mathrm{Set}$. See the diagrams below:
+	
+	\begin{center}
+	\begin{tikzcd}
+	\mathcal{C}\arrow[r,"\Hom_\mathcal{C}(c{,}-)"]
+	 & \mathrm{Set}\\[-15pt]
+	 x\arrow[d,swap,"f",""{name=A,below}] 
+	 &\Hom_\mathcal{C}(c,x) \arrow[d,"f_*",""{name=B,below}]\\
+	 y
+		&\Hom_\mathcal{C}(c,y)
+		\arrow[mapsto, from=A,to=B,shorten <= 1.3em, shorten >= 3em]
+	\end{tikzcd}\ \ \ \ \ \ \ \ \ 
+	\begin{tikzcd}
+	\mathcal{C} ^{op}\arrow[r,"\Hom_\mathcal{C}(-{,}c)"]
+	 & \mathrm{Set}\\[-15pt]
+	 x\arrow[d,swap,"f",""{name=A,below}] 
+	 &\Hom_\mathcal{C}(x,c) \\
+	 y
+		&\Hom_\mathcal{C}(y,c)\arrow[u,swap,"f^*",""{name=B,below}]
+		\arrow[mapsto, from=A,to=B,shorten <= 1.3em, shorten >= 3em]
+	\end{tikzcd}
+	\end{center}
+	The sign $f_*$ stands for ``composing $f$ by left''. That is, it is a set-function from $\Hom_\mathcal{C}(c,y)$ to $\Hom_\mathcal{C}(c,x)$ induced by $f$, which maps each element $g\in \Hom_\mathcal{C}(c,y)$ to $fg\in \Hom_\mathcal{C}(c,x)$. Dually, $f^*$ stands for ``composing $f$ by right''.\par
+	These two functors are significantly important, called \textbf{functors represented by $c$}. We shall learn them more carefully after the notion of natural transformation is introduced.
+	\item Given two categories $\mathcal{J}$ and $\mathcal{C}$. Given an object $c\in \Obj(\mathcal{C})$, then it induces a \textbf{constant functor} $c:\mathcal{J}\to \mathcal{C}$, which sends all objects of $\mathcal{J}$ to $c\in\Obj(\mathcal{C})$ and all morphisms of $\mathcal{J}$ to $1_c\in\End_\mathcal{C}(c)$. This functor is trivial but useful. We will use it to define the notion of cones, in order to introduce the notion of limits and colimits.
+	\item Given a functor $F:\mathcal{C}\to \mathcal{D}$, the \textbf{opposite functor} of $F$, $F^{op}:\mathcal{C}^{op}\to \mathcal{D}^{op}$, is defined by nothing but taking everything to what $F$ brings it to:
+	\[F^{op}c\coloneqq Fc,\ \ F^{op}f^{op}\coloneqq (Ff)^{op},\ \ \forall c\in\Obj(\mathcal{C}), f\in\Mor(\mathcal{C}).\]
+	\item Given a category $\mathcal{C}$, then there is an identity functor $1_\mathcal{C}:\mathcal{C}\to\mathcal{C}$ that sents everything in $\mathcal{C}$ to itself.
+	\item For categories with objects having underlying sets and morphisms having underlying set-functions with composition the composition of set-functions (such as $\mathrm{Grp}$, $\mathrm{Ab}$, $\mathrm{Ring}$, etc.), there is a \textbf{forgetful functor} from these categories to $\mathrm{Set}$. For example, the forgetful functor $U:\mathrm{Grp}\to \mathrm{Set}$ sends a group to its underlying set and a group homomorphism to its underlying set-function.
+	\item There is a functor $(-)^*:\mathrm{Vect}_\mathbb{F}^{op}\to \mathrm{Vect}_\mathbb{F}$ that takes a vector space $V$ to its \textbf{dual vector space} $V^*\coloneqq\Hom_{\mathrm{Vect}_\mathbb{F}}(V,\mathbb{F})$. It is somehow very similar to the contravariant functor $\Hom_\mathcal{C}(-,c)$ in (i), hence we shall not explain more about it.
+	\item There is a functor $F:\mathrm{Set}\to \mathrm{Grp}$ that sends a set $X$ to the \textbf{free group} on $X$. We shall return to this example after we defined what a free group is.
+	\end{enumerate}
+	\end{example}
+	\begin{example}
+	Also, with functors, we can now have more examples of categories:
+		\begin{enumerate}[label=(\roman*)]
+			\item The category of all small categories, denoted by $\mathrm{Cat}$, in which:
+				\begin{itemize}
+					\item Objects: All small categories.
+					\item Morphisms: All functors between small categories.
+					\item Composition: Composition of functors
+				\end{itemize}
+			\item The category of all locally small categories, denoted by $\mathrm{CAT}$, in which:
+				\begin{itemize}
+					\item Objects: All locally small categories.
+					\item Morphisms: All functors between locally small categories.
+					\item Composition: Composition of functors.
+				\end{itemize}
+				
+			\item *The category of all categories of non-negative integers, also called the \textbf{simplex category}, denoted by $\triangle$, in which:
+				\begin{itemize}
+					\item Objects: All categories of non-negative integers. That is, $[\mathrm{n}]$ for all $n\in \mathbb{N}$.
+					\item Morphisms: All functors between these categories.
+					\item Composition: Composition of functors.
+				\end{itemize}
+		Given a category $\mathcal{C}$, then a functor $F:\triangle^{op}\to \mathcal{C}$ is called a \textbf{simplicial object} in $\mathcal{C}$. When $\mathcal{C}=\mathrm{Set}$, it is called a \textbf{simplicial set}; when $\mathcal{C}=\mathrm{Grp}$, it is called a \textbf{simplicial group}, etc.
+		\end{enumerate}
+	\end{example}
+	It's easy to see that $\mathrm{Cat}$ is a subcategory of $\mathrm{CAT}$. The \textbf{empty category} which consists of no object is the initial object of both $\mathrm{Cat}$ and $\mathrm{CAT}$, and the ordinal category $\mathrm{1}$ is the terminal object of both. The Russell's paradox suggests that there should not be a category having itself as an object of it, hence there is no category of all categories; and this implies that $\mathrm{Cat}$ is not small and $\mathrm{CAT}$ is not locally small.\par
+	We now state the notion of product of two categories, after which we can ``combine'' the two functors in Example 2.1 (i) to one functor.
+	\begin{definition}[Product of two categories]
+	Given two categories $\mathcal{C}$ and $\mathcal{D}$, their \textbf{product}, denoted by $\mathcal{C}\times\mathcal{D}$, is a category in which
+	\begin{itemize}
+		\item Objects: All ordered pairs $(c,d)$ where $c\in\Obj(\mathcal{C})$ and $d\in\Obj(\mathcal{D})$.
+		\item Morphisms: All ordered pairs $(f,g):(c,d)\to (c',d')$, where $f\in\Hom_\mathcal{C}(c,c')$ and $g\in\Hom_\mathcal{D}(d,d')$.
+		\item Composition: Componentwise composition according to the composition in $\mathcal{C}$ and $\mathcal{D}$ respectively.
+	\end{itemize}
+	\end{definition} 
+	Similarly, two functors can be ``producted'' together:
+	\begin{definition}[Product of two functors]
+	Given two functors $F:\mathcal{C}\to \mathcal{D}$, $G:\mathcal{X}\to\mathcal{Y}$, then there is a \textbf{product functor} of them, denoted by $F\times G:\mathcal{C}\times\mathcal{X}\to\mathcal{D}\times\mathcal{Y}$, with everything defined component-wise, i.e.:
+	\[F\times G(c,x)\coloneqq (Fc,Gx)\in\Obj(\mathcal{D}\times\mathcal{Y}),\ \ \forall (c,x)\in\Obj(\mathcal{C}\times\mathcal{X}),\]
+	and 
+	\[F\times G(f,g)\coloneqq (Ff,Gg)\in\Mor(\mathcal{D}\times\mathcal{Y}),\ \ \forall (f,g)\in\Mor(\mathcal{C}\times\mathcal{X}).\]
+	\end{definition}
+	We end this section by our ``combined'' functor. Note that it is not the product functor of $\Hom_\mathcal{C}(-,c)$ and $\Hom_\mathcal{C}(c,-)$. It is an important exmaple in adjunction, but we wouldn't cover that so far.
+	\begin{definition}[Two-sided represented functor]
+	If $\mathcal{C}$ is locally small, then there is a \textbf{two-sided represented functor} 
+	\[\Hom_\mathcal{C}(-,-):\mathcal{C}^{op}\times \mathcal{C}\to \mathrm{Set},\]
+	that maps an object $(x,y)\in\Obj(\mathcal{C}^{op}\times \mathcal{C})$ to the set $\Hom_\mathcal{C}(x,y)$, a morphism $(f,h)\in\Mor(\mathcal{C}^{op}\times \mathcal{C})$ to the function $(f^*,h_*)$ defined by:
+	\[(f^*,h_*)(g)\coloneqq hgf,\ \ \forall g\in\Hom_\mathcal{C}(\cod f,\dom h).\]
+	Note that here $f$ is seen as a morphism of $\mathcal{C}$ instead of its opposite category $\mathcal{C}^{op}$, in order to avoid unnatural notations.
+	\end{definition}

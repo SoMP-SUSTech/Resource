@@ -1,0 +1,64 @@
+\documentclass{article}
+\title{Category Theory and Abstract Algebra}
+\author{Li, Yunsheng}
+\date{}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{underscore}
+\usepackage{amssymb}
+\usepackage{mhchem}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{extarrows}
+\usepackage{bm}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{enumitem}\usepackage[colorlinks,linkcolor=black]{hyperref}
+\usepackage{titlesec}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\pagestyle{plain}
+
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Obj}{Obj}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\cod}{cod}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\coker}{coker}
+
+\geometry{a4paper,left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.5cm}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\input{introduction}
+\newpage
+\input{category}
+\newpage
+\input{functor}
+\newpage
+\input{natural transformation}
+\newpage
+\input{universal property}
+\newpage
+\input{limits and colimits}
+\end{document}

@@ -1,0 +1,150 @@
+\section{Category}
+In this section we will introduce some elementary notions in category theory and give several examples of categories.
+	
+	\begin{definition}[Category]
+	A \textbf{category} $\mathcal{C}$ consits of:
+		\begin{itemize}
+			\item a collection of \textbf{objects}. We would denote this collection by $\Obj(\mathcal{C})$. If something $X$ is an object of $C$, then we say $X$ is in $\Obj(\mathcal{C})$, which is denoted by $X\in\Obj(\mathcal{C})$.
+			\item a collection of \textbf{morphisms}. We would denote this collection by $\Mor(\mathcal{C})$. Similarly, if something $f$ is a morphism of $\mathcal{C}$, then we say $f$ is in $\Mor(\mathcal{C})$, denoted by $f\in \Mor(\mathcal{C})$.\footnote{Although we used the notation $\in$ as is in set theory, neither $\Obj(\mathcal{C})$ nor $\Mor(\mathcal{C})$ was asked to be as samll as a set. As we shall see, for the category $\mathrm{Set}$, neither $\Obj(\mathrm{Set})$ nor $\Mor(\mathrm{Set})$ is a set.}
+		\end{itemize}
+	where the morphisms satisfy the following properties (or, say, have the following information):
+		\begin{itemize}
+			\item Each morphism of $\mathcal{C}$ specifies two objects of $\mathcal{C}$ called its \textbf{domain} and \textbf{codomain}, respectively. The notation $f:X\to Y$, read ``$f$ is a morphism from $X$ to $Y$'', signifies that $f$ is a morphism with domain $X$ and codomain $Y$. With this notation, a morphism is also called an \textbf{arrow} pointing from its domain to its codomain. Given a morphism $f$, we denote its domain by $\dom f$ and its codomain by $\cod f$. Two morphisms $f,g$ with $\dom f=\dom g$ and $\cod f=\cod g$ are said to be \textbf{parallel}, and the notation $f,g:X\rightrightarrows Y$ signifies that $f$ and $g$ are parallel morphisms with domain $X$ and codomain $Y$. Given two objects $X$ and $Y$ of $\mathcal{C}$, we denote the collection of all morphisms of $\mathcal{C}$ with $X$ as its domain and $Y$ as its codomain by $\Hom_\mathcal{C}(X,Y)$.\footnote{Again, $\Hom_\mathcal{C}(X,Y)$ might not be a set, though we would let the notation $f\in\Hom_\mathcal{C}(X,Y)$ signify that $f$ is a morphism of $\mathcal{C}$ with $\dom f=X$ and $\cod f=Y$.} A morphism $f$ with $\dom f=\cod f$ is called an \textbf{endomorphism}, and we denote the collection $\Hom_\mathcal{C}(X,X)$ by $\End_\mathcal{C}(X)$. The subscript $\mathcal{C}$ could be omited, if there comes no confusion about that which category we are focused on.
+			\item For any two morphisms $f,g$ of $\mathcal{C}$ with $\cod f=\dom g$, there exists a morphism $h$ of $\mathcal{C}$ with $\dom h=\dom f$ and $\cod h=\cod g$ specified by $f$ and $g$ according to some rules called the \textbf{composition law} in $\mathcal{C}$. We say that $h$ is the \textbf{composite morphism} of $g$ composed with $f$ (according to the composition law in $\mathcal{C}$), usually denoting it by $gf$ instead of $h$.\footnote{Sometimes we might want to specify that according to composition law in which category is the composite morphism determined, in which case we would put some notation between $g$ and $f$. For example, $g\circ_\mathcal{C} f$ might denote that $g\circ_\mathcal{C} f$ is the composition morphism of $g$ composed with $f$ according to the composition law in the category $\mathcal{C}$.} For morphisms $f$ and $g$ satisfying the condition $\cod f=\dom g$, we say that they are \textbf{composable}. We may express composition by notations below:
+				\[f:X\to Y,\ \ g:Y\to Z\ \ \ \leadsto\ \ \ \ gf:X\to Z.\]
+			\item For any composable triple of morphisms $f,g,h$ of $\mathcal{C}$, we have
+				\[h(gf)=(hg)f.\]
+			That is, the composition law is associative. Therefore, we can omit the parameter and write $hgf$ instead. Namely,
+				\[f:X\to Y,\ \ g:Y\to Z,\ \ h:Z\to W\ \ \ \ \leadsto\ \ \ \ hgf:X\to W.\]
+			\item For any object $X$ of $\mathcal{C}$, there exists an \textbf{identity morphism} $1_X:X\to X$, which satisfies that
+			\[1_Xf=f,\ \ g1_X=g\]
+			for any $f,g\in \Mor(\mathcal{C})$ s.t. $\cod f=\dom g=X$. It is immediate that the identity morphism of an object in a certain category is unique. We would always denote the identity morphism of an object $X$ by $1_X$, if there comes no confusion about that of which category the identity morphism is. A category with only identity morphisms is said to be \textbf{discrete}.
+		\end{itemize}
+	\end{definition}
+We state several basic notions about a category before we give examples of categories.
+	\begin{definition}[Subcategory]
+	Let $\mathcal{C},\mathcal{D}$ be two categories, then $\mathcal{C}$ is said to be the \textbf{subcategory} of $\mathcal{D}$, if the composition law in $\mathcal{C}$ and $\mathcal{D}$ coincidents and every element in $\Obj(\mathcal{C})$ is in $\Obj(\mathcal{D})$, every element in $\Mor(\mathcal{C})$ is in $\Mor(\mathcal{D})$. We might denote the last two conditions by $\Obj(\mathcal{C})\subset\Obj(\mathcal{D})$ and $\Mor(\mathcal{C})\subset\Mor(\mathcal{D})$ for conveniont.
+	\end{definition}
+
+	\begin{definition}[Small, Locally Small]
+	A category $\mathcal{C}$ is \textbf{small} if $\Mor(\mathcal{C})$ is a set, or equivalently, there is a bijection from $\Mor(\mathcal{C})$ to some set. $\mathcal{C}$ is \textbf{locally small} if for any $X,Y\in \Obj(C)$, $\Hom_\mathcal{C}(X,Y)$ is a set.
+	\end{definition}
+There are categories that are neither small nor locally small. This thesis would mainly focus on locally small categories. For a small category $\mathcal{C}$, $\Obj(\mathcal{C})$ is also a set since there is an injection\footnote{Although what we said as a ``collection'' might be too large to be a set, we can still define notions like maps, inclusion, injective, surjective, ..., just as how we defined them in set theory.} $\Obj(\mathcal{C})\to\Mor(\mathcal{C}):X\mapsto 1_X$.
+	\begin{definition}[Initial, Terminal]
+	Given a category $\mathcal{C}$. An object $A$ of $\mathcal{C}$ is an \textbf{initial object} of $\mathcal{C}$ if $\Hom_\mathcal{C}(A,X)$ contains only one element for any $X\in \Obj(\mathcal{C})$. We might say such an object is \textbf{initial} instead of saying it is an initial object of some category, if there comes no confusion about that which category we are focused on. \\
+	Dually, an object $A$ of $\mathcal{C}$ is a \textbf{terminal object} of $\mathcal{C}$ if $\Hom_\mathcal{C}(X,A)$ contains only one element for any $X\in \Obj(\mathcal{C})$. Similarly, we might say an object is \textbf{terminal} instead of saying it is a terminal object of some category.
+	\end{definition}
+In particular, for an object $A$ which is either initial or terminal, $\End(A)$ contains only one element, the identity map $1_A$. It's possible for an object to both initial and terminal, as we shall see in the category $\mathrm{Grp}$.
+	\begin{definition}[Isomorphism]
+	Given a category $\mathcal{C}$. A morphism $f:X\to Y$ of $\mathcal{C}$ is an \textbf{isomorphism} if there exists a morphism $g\in\Hom_\mathcal{C}(Y,X)$ s.t.
+	\[gf=1_{X},\ \ fg=1_{Y}.\]
+	Such a $g$ is called the \textbf{inverse} of $f$. If there is an isomorphism between $X$ and $Y$, then $X$ and $Y$ are said to be \textbf{isomorphic}, denoted by $X\cong Y$.
+	\end{definition}
+It's clear that isomorphic is an equivalence relation, hence we used the word ``between'' here. Also, the inverse of an isomorphism is unique, hence the morphism $g$ mentioned above might be denoted as $f^{-1}$.\par
+An immediate fact is that, given a category $\mathcal{C}$, then all initial objects of $\mathcal{C}$ are isomorphic to each other, so do all terminal objects of $\mathcal{C}$.
+	\begin{definition}[Groupoid]
+	A \textbf{groupoid} is a category whose morphisms are all isomorphisms.
+	\end{definition}
+	Now we can redefine what we called a ``group'' in abstract algebra in a categorical view:
+	\begin{definition}[Group]
+	A \textbf{group} is a locally small groupoid who has only one object.
+	\end{definition}
+	In fact, the groupoid mentioned above is small. In this point of view, given a group under our traditional notion, it induces a category, namely a locally small groupoid who has only one object. 
+	\begin{example}
+	 We can now state several examples of categories below:
+	\begin{enumerate}[label=(\roman*)]
+	\item Given a group $G$, then it induces a category, denoted by $\mathrm{B}G$, in which:
+		\begin{itemize}
+			\item Objects: an abstract-nonsense point $\bullet$.
+			\item Morphisms: Elements in $G$, with $\bullet$ being their domains and codomains.
+			\item Composition law: The composition in the group $G$. That is, if we let $\circ$ denotes the group operation, then for any $f,g\in G(=\Mor(\mathrm{B}G))$,
+			\[gf\coloneqq g\circ f.\]
+		\end{itemize}
+	The identity morphism $1_\bullet$ is exactly the identity in $G$, and every morphism in $\mathrm{B}G$ is an isomorphism, with its inverse in $G$ being its inverse as a morphism.
+	\item The category of sets, denoted by $\mathrm{Set}$, in which:
+		\begin{itemize}
+			\item Objects: All sets.
+			\item Morphism: All set-functions, with their domain  and codomain the same as the domain and codomain when seen as set-functions.\footnote{When we define a category, if the morphism is chosen to be something with pre-defined domains and codomains, we shall omit the words ``with their domain  and codomain the same as the domain and codomain when seen as set-functions'' and take this as default.}
+			\item Composition law: Composition of set-functions.
+		\end{itemize}
+	The identity morphism for each object (set) is the identity map from the set to itself. A morphism of $\mathrm{Set}$ is an isomorphism if and only if it is a bijection. The initial object in $\mathrm{Set}$ is the empty set $\varnothing$, and the terminal object is the singleton $\{*\}$. $\mathrm{Set}$ is locally small but not small.
+	\item The category of groups, denoted by $\mathrm{Grp}$, in which:
+		\begin{itemize}
+			\item Objects: All groups.
+			\item Morphisms: All group homomorphisms.
+			\item Composition law: Composition of set-functions.
+		\end{itemize}
+	The identity morphism is the identity group homomorphism. A morphisms of $\mathrm{Grp}$ is an isomorphism if and only if it is a group isomorphism. The initial object and the terminal object in $\mathrm{Grp}$ are both the trivial group $\{*\}$, namely the trivial group is both initial and terminal in $\mathrm{Grp}$. Again, $\mathrm{Grp}$ is locally small but not small, for there is an injection from $\Obj(\mathrm{Set})$ to $\Obj(\mathrm{Grp})$, that sends each set to the free group on it; we shall define what a free group is after we introduce the notion of universal property.
+\newpage
+	\item The category of abelian groups, denoted by $\mathrm{Ab}$, in which:
+		\begin{itemize}
+			\item Objects: All abelian groups.
+			\item Morphisms: All group homomorphisms between abelian groups.
+			\item Composition law: Composition of set-functions.
+		\end{itemize}
+	$\mathrm{Ab}$ is a subcategory of $\mathrm{Grp}$. $\mathrm{Ab}$ is also locally small but not small, for there is an injection from $\Obj(\mathrm{Set})$ to $\Obj(\mathrm{Ab})$ that sends each set to the free abelian group on it; we shall define what a free abelian group is after the notion of universal property is introduced. We will see that $\mathrm{Ab}$ is better than $\mathrm{Grp}$, one aspect of this is that the product and coproduct for a certain set of objects in $\mathrm{Ab}$ are the same, which is not true in $\mathrm{Grp}$, after the notion of limits and colimits are introduced.\footnote{``Life is simpler in $\mathrm{Ab}$ than in $\mathrm{Grp}$.'' -- Paolo Aluffi.}
+	\item The category of rings, denoted by $\mathrm{Ring}$, in which:
+		\begin{itemize}
+			\item Objects: All rings.
+			\item Morphisms: All ring homomorphisms.
+			\item Composition law: Composition of set-functions.
+		\end{itemize}
+	The identity morphism is the identity ring homomorphism, and a morphism of $\mathrm{Ring}$ is an isomorphism if and only if it is a ring isomorphism. The ring $\mathbb{Z}$ of integers is the initial object in $\mathrm{Ring}$, and the trivial ring $\{0,1\}$ is the terminal object.
+	\item The category of finite-dimensional vector spaces over a given field $\mathbb{F}$, denoted by $\mathrm{Vect}_\mathbb{F}$, in which:
+		\begin{itemize}
+			\item Objects: All finite-dimensional vector spaces over $\mathbb{F}$.
+			\item Morphisms: All linear maps between these vector spaces.
+			\item Composition law: Composition of set-functions.
+		\end{itemize}
+	The zero-dimentional space $0$ is the initial and terminal object of $\mathrm{Vect}_\mathbb{F}$. Again, $\mathrm{Vect}_\mathbb{F}$ is locally small but not small, for its collection of objects contains the collection of all one-dimensional vector spaces, and there is an injection from the collection of all one-point sets that sends every one-point set to the one-dimensional vector space generated by taking that set as its basis. The collection of all one-point sets is not a set, for there is an injection from the collection of all sets that sends every set $A$ to the one-point set $\{A\}$ whose only element is $A$.
+	\item *Given a topological space $X$, then it induces a category, denoted by $\mathrm{T}X$, in which:
+		\begin{itemize}
+			\item Objects: All points in $X$.
+			\item Morphisms: Path-homotopy classes of pathes in $X$, with their domain and codomain being the initial point and final point of the pathes, respectively.
+			\item Composition law: For any $[f]$ and $[g]$ morphisms of $\mathrm{T}X$ with $\cod[f]=\dom [g]$, their composition $[gf]=[g][f]$ is the path-homotopy class of
+			\[gf=\left\{
+				\begin{aligned}
+					&f(2s)\ \ \ \ \ \ \ \ \ \  &s\in[0,\frac{1}{2}]\\
+					&g(2s-1)&s\in[\frac{1}{2},1]
+				\end{aligned}
+			\right.
+			\]
+		\end{itemize}
+	The category $\mathrm{T}X$ is well-defined, c.f. Munkres, J. \textsl{Topology} $\S$51.
+	\item *The category of topological spaces, denoted by $\mathrm{Top}$, in which:
+		\begin{itemize}
+			\item Objects: All topological spaces.
+			\item Morphisms: All continuous maps between topological spaces.
+			\item Composition law: Composition of set-functions.
+		\end{itemize}
+	A morphism of $\mathrm{Top}$ is an isomorphism if and only if it is a homeomorphism.
+	\item The category of non-negative integers no more than $n$, denoted by $[\mathrm{n}]$, in which:
+	 	\begin{itemize}
+	 		\item Objects: Integers $0,1,\cdots,n$.
+	 		\item Morphisms: For each pair of integers $(m_1,m_2)$ with $m_1\leq m_2$, an arrow pointing from $m_1$ to $m_2$. That is, the relation ``$\leq$''. $\Hom_{[\mathrm{n}]}(m_1,m_2)$ is a singleton if $m_1\leq m_2$ and is empty if $m_1>m_2$.
+	 		\item Composition law: The composition follows from the transitivity of ``$\leq$''. 
+	 	\end{itemize}
+	Note that the relation ``$\leq$'' can't be replaced by ``<'', for the latter does not give identity morphisms. The category $[\mathrm{n}]$ is also called the \textbf{ordinal category} $\mathrm{n+1}$.
+	\item The category of all non-negative integers, denoted by $\omega$, in which:
+		\begin{itemize}
+			\item Objects: All non-negative integers, namely all elements in $\mathbb{N}$.
+			\item Morphisms: The relation ``$\leq$''.
+			\item Composition law: The transitivity of ``$\leq$''.
+		\end{itemize}
+	This example, along with (ix), are very simple categories but will appear from time to time in our further study of category theory. In fact, a basic object for us to establish the notion of $\infty$-category is the category of all categories of non-negative integers, c.f. Example 2.2.(iii).
+	\end{enumerate}
+	\end{example}
+We are mainly interested in $\mathrm{Set}$, $\mathrm{Grp}$ and $\mathrm{Ab}$, and we will take a fancy glance at $\mathrm{Top}$ if possible. Note that isomorphic in these categories coincident with our traditional equivalence relations between their objects, namely equinumerous between sets, isomorphic between groups, homeomorphic between topological spaces.\par
+We state a few more notions about morphism before we end this section.
+	\begin{definition}[Automorphism]
+	Given a category $\mathcal{C}$. An \textbf{automorphism} of $\mathcal{C}$ is an endomorphism which is also an isomorphism. Given $X\in\Obj(\mathcal{C})$, we denote the collection of all automorphisms of $\mathcal{C}$ with domain $X$ by $\Aut_\mathcal{C}(X)$. The subscript could be omited, like always.
+	\end{definition}
+It's clear that $\Aut_\mathcal{C}(X)\subset \End_\mathcal{C}(X)$. When $\Aut_\mathcal{C}(X)$ is a set, it has the structure of a group, seen as the subcategory of $\mathcal{C}$ where the only object is $X$ and the morphisms are all elements in $\Aut_\mathcal{C}(X)$.
+	\begin{definition}[Monomorphism, Epimorphism]
+	A morphism $f$ of a category $\mathcal{C}$ is \\
+	(i) a \textbf{monomorphism} if for any parallel morphisms $h,k$ of $\mathcal{C}$ with $\cod h=\cod k=\dom f$,
+	\[fh=fk\ \ \Rightarrow\ \ h=k;\]
+	(ii) an \textbf{epimorphism} if for any parallel morphisms $h,k$ of $\mathcal{C}$ with $\dom h=\dom k=\cod f$, 
+	\[hf=kf\ \ \Rightarrow\ \ h=k.\]
+	\end{definition}
+In the category $\mathrm{Set}$, a monomorphism is exactly an injection and an epimorphism is exactly a surjection. This is also true in the category $\mathrm{Grp}$. However, this needs not hold for all categories having set-functions as its morphisms. For example, the inclusion $\mathbb{Z}\hookrightarrow \mathbb{Q}$ is not surjective, but it is an epimorphism in $\mathrm{Ring}$.
