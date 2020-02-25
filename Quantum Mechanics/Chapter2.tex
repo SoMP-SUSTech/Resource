@@ -59,15 +59,16 @@ Mathematically, the Lagrangian mechanics is formulated with the tangent bundle o
 With constraints, the configuration space of a classical system will be a submanifold of the  Euclidean space. In this case, it might be redundant to still use Cartesian coordinates since they are not independent when constrained to the manifold. That leads to our first definition:
 
 \begin{definition}
-    Given a classical system, if a set of independent variables can totally determine the configuration of the system, then they are called general coordinates of the system.
+    Given a classical system of configuration manifold $M$, components of a chart of $M$ are called general coordinates.
 \end{definition}
 
 \textbf{REMARK}:
 \begin{itemize}
-    \item Remark for the remarks. Things in the REMARK part are not necessarily related to the main context. It can be aimed for anyone. It is just something I want to note for the current topic. Do not get bothered if you came into some word you do not understand. But finishing reading those words is appreciated.
+    \item Remark for the remarks. Things in the REMARK part are not necessarily related to the main context. It can be aimed for anyone. It is just something I want to note for the current topic. Do not get bothered if you came into some word you do not understand. But finishing reading those words would be helpful to have a grander picture.
     \item I won't give \textit{classical system} a definition since there is nothing special to note here. However, I will use this concept to define a quantum system.
-    \item That is to say, a choice of general coordinates is a choice of parameterization of the configuration manifold. The number of general coordinates is equal to the number of dimension of this manifold, which is clearly invariant under changes of variables.
-    \item The configuration manifold is always an embedded manifold into an higher dimensional Euclidean space. So sometimes we still use the redundant Euclidean coordinates since it is endowed with a linear structure and a natural metric structure.
+    \item The configuration manifold or configuration space consists of every possible configuration of the classical system. For a given chart of it, the number of general coordinates is the same as the dimension of $M$.
+    \item One thing to note for charts is that they only make a local sense and might be ill-defined globally. Thus we need a few charts to form an atlas for a manifold. However, in physics, if there are only few singularities in the chart, we usually just keep working with that. For example, the sphere $S^2$ can not be covered by only one chart, but we are happy to use polar coordinate and usually the singularities do not matter.
+    
 \end{itemize}
 
 \textbf{Examples}:
@@ -100,6 +101,39 @@ With constraints, the configuration space of a classical system will be a subman
     
     A double pendulum is a single pendulum connected to another. Thus the configuration space is diffeomorphic to $S^1\times S^1\cong T^2$.
     
+\end{itemize}
+
+\textbf{REMARK}:
+\begin{itemize}
+    \item For problems related to only one point (one particle), we can always embedded it in an Euclidean space. However, the rest example involves two or more moving parts so that even if the configuration manifold can be embedded in a higher dimensional Euclidean space, it is neither natural nor intrinsic.
+\end{itemize}
+
+A configuration of the system is represented by a point $p\in M$. As the system evolves with time, it passes a curve $p: I\rightarrow M$. For a given chart, $p$ can be represented by the components $q=(q^1,q^2,\cdots,q^n)$.
+
+The target for the study of dynamics is to determine $p(t)$ or, more explicitly, $q(t)$, which is done by the following principle.
+
+\begin{principle}
+The dynamics of a classical system with configuration space $M$ is determined by a given function $L: TM\times I\rightarrow \mathbb{R}$ called Lagrangian such that for given initial and final conditions $q(t_0)=q_0, q(t_1)=q_1$, the path $q(t)$ that the system takes minimizes the action functional $S:\mathrm{Map}(I, M)\rightarrow \mathbb{R}$ given by
+\begin{equation}
+    S[q(t)]=\int_{t_0}^{t_1}\diff t L(q(t), \dot{q}(t), t).
+\end{equation}
+This is called the principle of least action. 
+\end{principle}
+
+\textbf{REMARK}:
+\begin{itemize}
+    \item The tangent bundle $TM$: ~\cite{Classical Dynamics: A Contemporary Approach}
+    
+    When we try to imagine a tangent line to some curve, we always embed it in a three dimension Euclidean space. Tangent vectors for higher dimensional manifolds are not easy to imagine since they do not appear as arrows in three dimensions. Thus we need to find an intrinsic way to understand tangent vectors. For example, imagine a unit sphere $S^2=\{(x, y, z)\vert x^2+y^2+z^2=1\}$ embedded in three dimensional Euclidean space and a point $(x=1,y=0,z=0)$ on it. A tangent vector at that point can be something like $(0, 3.4, 6.2)$ or $(0, 100, -20)$. You may notice that every tangent vector at that point has its $x$-component vanishing. In general, a tangent vector at other points may has three non-zero components. However, the possible values of it only have degrees of freedom two. Thus the more elegant way to do this is to find a tangent space on that point and represent the vector with coordinates of that space.
+    
+    Then how do we represent the tangent space? Velocities give a good hint. Every tangent vector on that sphere can be regarded as a velocity vector for some trajectory on it. So as a generalization we may define tangent vectors in terms of curves:
+    
+    For a curve $p:I\rightarrow M$, the velocity or tangent vector can be represented in chart $q$ as
+    \begin{equation}
+        \tau^i=\dot{q}^i=\frac{\diff}{\diff t}q^i(p(t)).
+    \end{equation}
+    
+    This definition of tangent vector is not intrinsic enough since it relies on curves and curves do not correspond uniquely to tangent vectors. But this will suffice our target. Now we have naturally induced a chart $(q,\dot{q})$ for $TM$ with the chart $q$ for $M$.
 \end{itemize}
 
 \subsection{Hamilton formulism}
